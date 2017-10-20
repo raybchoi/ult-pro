@@ -1,0 +1,11 @@
+<h1>Show all users</h1>
+<hr>
+<% @users.each do |user| %>
+  <%= link_to "#{user.first_name.upcase}", user_path(user.id) %>
+  <p>User ID: <%= user.id %></p>
+  <p>First Name: <%= user.first_name %></p>
+  <p>Last Name: <%= user.last_name %></p>
+  <p>Email: <%= user.email %></p>
+  <p>User Name: <%= user.username %></p>
+  <p>Company: <%= user.company %></p>
+<% end %>
