@@ -61,7 +61,7 @@ Task.create([
     title:"Fin Models are awesome",
     description: 'Complete finanical model Financial modeling is the task of building an abstract representation (a model) of a real world financial situation. This is a mathematical model designed to represent (a simplified version of) the performance of a financial asset or portfolio of a business, project, or any other investment.',
     assignee: User.first,
-    owner: User.second,
+    owner: User.third,
     creator: User.second,
     minute: Minute.first,
     due_date: "10-20-2017",
