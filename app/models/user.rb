@@ -11,4 +11,10 @@ class User < ApplicationRecord
 
   # minute that they created - allows User.first.created_minutes - User.first.created_minutes.first.title
   has_many :created_minutes, :class_name => "Minute", :foreign_key => "minute_creator_id", dependent: :destroy
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+  :lockable
 end

@@ -1,3 +1,9 @@
+# app/views/artists/index.json.jbuilder
+json.artists @artists do |artist|
+  json.(artist, :id, :name, :label)
+  json.albums artist.albums, partial: 'albums/album', as: :album
+end
+
 json.extract! @user, :id, :first_name, :last_name, :email, :username, :company, :created_at, :updated_at
 
 json.url user_url(@user, format: :json)

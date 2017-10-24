@@ -1,6 +1,9 @@
-json.extract! @user, :id, :first_name, :last_name, :email, :username, :company, :created_at, :updated_at
+json.extract! @user, :id, :first_name, :last_name, :email, :company, :created_at, :updated_at
 
 json.url user_url(@user, format: :json)
+
+
+
 
 json.created_tasks do
   json.array!(@user.created_tasks) do |created_task|
@@ -10,15 +13,27 @@ json.created_tasks do
     json.due_date created_task.due_date
     json.assigned_date created_task.assigned_date
     json.completed_date created_task.completed_date
-    json.minute_id created_task.minute
-      # json.min_user do
-      #     json.min_user created_task.minute.minute_creator
-      # end
-    json.owner_id created_task.owner
-    json.assignee_id created_task.assignee
-    json.creator_id created_task.creator
-    # route for the path
-    json.url user_url(@user, created_task, format: :json)
+    json.created_date created_task.created_at
+    json.last_updated_date created_task.updated_at
+    json.url task_url(created_task.id, created_task, format: :json)
+
+    json.minute_info do
+      json.minute_id created_task.minute.id
+      json.minute_title created_task.minute.id
+      json.minute_notes created_task.minute.notes
+      json.delete_flag created_task.minute.delete_flag
+      json.remove_from_view created_task.minute.remove_from_view
+      json.meeting_date created_task.minute.meeting_date
+      json.updated_at created_task.minute.updated_at
+      json.minute_creator_info created_task.minute.minute_creator
+
+      json.minute_attenees created_task.minute.users
+    end
+
+    json.owner_info created_task.owner
+    json.assignee_info created_task.assignee
+    json.creator_info created_task.creator
+
   end
 end
 
@@ -30,12 +45,28 @@ json.owned_tasks do
     json.due_date owned_task.due_date
     json.assigned_date owned_task.assigned_date
     json.completed_date owned_task.completed_date
-    json.minute_id owned_task.minute
-    json.owner_id owned_task.owner
-    json.assignee_id owned_task.assignee
-    json.creator_id owned_task.creator
-    # route for the path
-    json.url user_url(@user, owned_task, format: :json)
+    json.created_date owned_task.created_at
+    json.last_updated_date owned_task.updated_at
+    json.url task_url(owned_task.id, owned_task, format: :json)
+
+    json.minute_info do
+      json.minute_id owned_task.minute.id
+      json.minute_title owned_task.minute.id
+      json.minute_notes owned_task.minute.notes
+      json.delete_flag owned_task.minute.delete_flag
+      json.remove_from_view owned_task.minute.remove_from_view
+      json.meeting_date owned_task.minute.meeting_date
+      json.updated_at owned_task.minute.updated_at
+      json.minute_creator_info owned_task.minute.minute_creator
+
+      json.minute_attenees owned_task.minute.users
+
+    end
+
+    json.owner_info owned_task.owner
+    json.assignee_info owned_task.assignee
+    json.creator_info owned_task.creator
+
   end
 end
 
@@ -48,11 +79,27 @@ json.assigned_tasks do
     json.due_date assigned_task.due_date
     json.assigned_date assigned_task.assigned_date
     json.completed_date assigned_task.completed_date
-    json.minute_id assigned_task.minute
+    json.created_date assigned_task.created_at
+    json.last_updated_date assigned_task.updated_at
+    json.url task_url(assigned_task.id, assigned_task, format: :json)
+
+    json.minute_info do
+      json.minute_id assigned_task.minute.id
+      json.minute_title assigned_task.minute.id
+      json.minute_notes assigned_task.minute.notes
+      json.delete_flag assigned_task.minute.delete_flag
+      json.remove_from_view assigned_task.minute.remove_from_view
+      json.meeting_date assigned_task.minute.meeting_date
+      json.updated_at assigned_task.minute.updated_at
+      json.minute_creator_info assigned_task.minute.minute_creator
+
+      json.minute_attenees assigned_task.minute.users
+
+    end
+
     json.owner_id assigned_task.owner
     json.assignee_id assigned_task.assignee
     json.creator_id assigned_task.creator
-    # route for the path
-    json.url user_url(@user, assigned_task, format: :json)
+
   end
 end

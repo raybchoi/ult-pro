@@ -16,22 +16,22 @@ User.create([
     first_name: "Ray",
     last_name: "Choi",
     email: "r@r.com",
-    username: 'panda',
     company: "GAP",
+    password: '123456',
   },
   {
     first_name: "Eric",
     last_name: "Choi",
     email: "e@e.com",
-    username: 'ejc',
     company: "GAP",
+    password: '123456',
   },
   {
     first_name: "Mo",
     last_name: "Choi",
     email: "m@m.com",
-    username: 'mopop',
     company: "GAP",
+    password: '123456',
   },
 ])
 

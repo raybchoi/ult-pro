@@ -58,3 +58,5 @@ gem 'jquery-rails'
 gem "table_print"
 # https://github.com/cyu/rack-cors for API usage
 gem 'rack-cors', :require => 'rack/cors'
+
+gem 'devise'
