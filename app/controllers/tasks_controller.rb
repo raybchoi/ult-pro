@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   def show
+    # need some current user checks in here
     @task = Task.find(params[:id])
   end
 
@@ -27,7 +28,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :assignee_id, :owner_id, :creator_id, :due_date, :assigned_date)
+    params.require(:task).permit(:title, :description, :assignee_id, :owner_id, :creator_id, :due_date, :assigned_date, :meeting_id, :status)
   end
 
 

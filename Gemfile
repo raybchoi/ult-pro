@@ -58,5 +58,7 @@ gem 'jquery-rails'
 gem "table_print"
 # https://github.com/cyu/rack-cors for API usage
 gem 'rack-cors', :require => 'rack/cors'
-
+# devise
 gem 'devise'
+# moments JS
+gem 'momentjs-rails', '~> 2.17', '>= 2.17.1'
