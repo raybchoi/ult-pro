@@ -10,10 +10,14 @@ json.created_tasks do
     json.id created_task.id
     json.title created_task.title
     json.description created_task.description
+    json.status created_task.status
+    json.delete_flag created_task.delete_flag
+
     json.due_date created_task.due_date
     json.assigned_date created_task.assigned_date
     json.completed_date created_task.completed_date
     json.created_date created_task.created_at
+
     json.last_updated_date created_task.updated_at
     json.url task_url(created_task.id, created_task, format: :json)
 
@@ -27,7 +31,7 @@ json.created_tasks do
       json.updated_at created_task.minute.updated_at
       json.minute_creator_info created_task.minute.minute_creator
 
-      json.minute_attenees created_task.minute.users
+      json.minute_attendees created_task.minute.users
     end
 
     json.owner_info created_task.owner
@@ -42,10 +46,14 @@ json.owned_tasks do
     json.id owned_task.id
     json.title owned_task.title
     json.description owned_task.description
+    json.status owned_task.status
+    json.delete_flag owned_task.delete_flag
+
     json.due_date owned_task.due_date
     json.assigned_date owned_task.assigned_date
     json.completed_date owned_task.completed_date
     json.created_date owned_task.created_at
+
     json.last_updated_date owned_task.updated_at
     json.url task_url(owned_task.id, owned_task, format: :json)
 
@@ -59,7 +67,7 @@ json.owned_tasks do
       json.updated_at owned_task.minute.updated_at
       json.minute_creator_info owned_task.minute.minute_creator
 
-      json.minute_attenees owned_task.minute.users
+      json.minute_attendees owned_task.minute.users
 
     end
 
@@ -76,10 +84,14 @@ json.assigned_tasks do
     json.id assigned_task.id
     json.title assigned_task.title
     json.description assigned_task.description
+    json.status assigned_task.status
+    json.delete_flag assigned_task.delete_flag
+
     json.due_date assigned_task.due_date
     json.assigned_date assigned_task.assigned_date
     json.completed_date assigned_task.completed_date
     json.created_date assigned_task.created_at
+
     json.last_updated_date assigned_task.updated_at
     json.url task_url(assigned_task.id, assigned_task, format: :json)
 
@@ -93,13 +105,13 @@ json.assigned_tasks do
       json.updated_at assigned_task.minute.updated_at
       json.minute_creator_info assigned_task.minute.minute_creator
 
-      json.minute_attenees assigned_task.minute.users
+      json.minute_attendees assigned_task.minute.users
 
     end
 
-    json.owner_id assigned_task.owner
-    json.assignee_id assigned_task.assignee
-    json.creator_id assigned_task.creator
+    json.owner_info assigned_task.owner
+    json.assignee_info assigned_task.assignee
+    json.creator_info assigned_task.creator
 
   end
 end

@@ -4,7 +4,7 @@ class CreateDataModels < ActiveRecord::Migration[5.1]
     create_table :tasks do |t|
       t.string :title
       t.string :description
-      t.string :completed
+      t.string :status
       t.string :delete_flag
       t.date :due_date
       t.date :assigned_date

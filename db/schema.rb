@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20171020044017) do
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.string "completed"
+    t.string "status"
     t.string "delete_flag"
     t.date "due_date"
     t.date "assigned_date"

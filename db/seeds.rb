@@ -66,6 +66,7 @@ Task.create([
     minute: Minute.first,
     due_date: "10-20-2017",
     assigned_date: "10-12-2017",
+    status: "Inprogress",
   },
   {
     title:"RoR for the win?",
@@ -76,6 +77,7 @@ Task.create([
     minute: Minute.second,
     due_date: "10-21-2017",
     assigned_date: "10-10-2017",
+    status: "Blocked",
   },
   {
     title:"Job no...",
@@ -86,6 +88,7 @@ Task.create([
     minute: Minute.second,
     due_date: "10-30-2017",
     assigned_date: "10-20-2017",
+    status: "Open",
   },
   {
     title:"Team report",
@@ -96,6 +99,7 @@ Task.create([
     minute: Minute.second,
     due_date: "11-20-2017",
     assigned_date: "10-02-2017",
+    status: "Blocked",
   },
   {
     title: 'RFID Tagging',
@@ -105,6 +109,8 @@ Task.create([
     creator: User.third,
     minute: Minute.first,
     due_date: "10-20-2017",
+    status: "Completed",
+    completed_date: "10-21-2017",
   },
 ])
 

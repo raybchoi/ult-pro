@@ -1,34 +1,44 @@
 console.log('User.js file loaded');
 $(document).on('turbolinks:load', function(){
-  $.fn.editable.defaults.mode = 'inline';
+  // $.fn.editable.defaults.mode = 'inline';
   // console.log(`${window.location.pathname}.json`);
 
-  function renderAllTasks() {
+  function renderAllTasksForOneUser() {
     $.ajax({
       method: 'GET',
-      url: `http://localhost:3000/${window.location.pathname}.json`,
+      url: `http://localhost:3000/users/${document.cookie.split('id=')[1]}.json`,
     })
     .then(function(res){
-      let jsonResponse = res
+      // let jsonResponse = jsonResponse
       console.log('Response - ', res);
       var tasksAssignedToMe = [];
       var tasksOtherOweMe = [];
       var tasksCreatedForMyself = [];
       for (let i = 0; i < res.assigned_tasks.length; i++) {
-        if ( res.assigned_tasks[i].assignee_id.id === res.assigned_tasks[i].owner_id.id ) {
+        // check to see if the task is assigned to self
+        if ( res.assigned_tasks[i].assignee_info.id === res.assigned_tasks[i].owner_info.id ) {
+          // if it is then fill in the array for tasks created for self
           tasksCreatedForMyself.push(
             {
+              status: res.assigned_tasks[i].status,
+              title: res.assigned_tasks[i].title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${res.assigned_tasks[i].id}`),
+              // description: res.assigned_tasks[i].description.slice(0,240).concat('...'),
+              taskResponsibleOwner: `${res.assigned_tasks[i].owner_info.first_name} ${res.assigned_tasks[i].owner_info.last_name}`,
+              createdDate: res.assigned_tasks[i].created_date,
+              dueDate: res.assigned_tasks[i].due_date,
               id: res.assigned_tasks[i].id,
-              title: res.assigned_tasks[i].title.slice(0,40).concat('...').link(`http://localhost:3000/tasks/${res.assigned_tasks[i].id}`),
-              taskOwner: res.assigned_tasks[i].owner_id.first_name,
             }
           )
         } else {
           tasksAssignedToMe.push(
             {
+              status: res.assigned_tasks[i].status,
+              title: res.assigned_tasks[i].title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${res.assigned_tasks[i].id}`),
+              // description: res.assigned_tasks[i].description.slice(0,240).concat('...'),
+              taskResponsibleOwner: `${res.assigned_tasks[i].owner_info.first_name} ${res.assigned_tasks[i].owner_info.last_name}`,
+              createdDate: res.assigned_tasks[i].created_date,
+              dueDate: res.assigned_tasks[i].due_date,
               id: res.assigned_tasks[i].id,
-              title: res.assigned_tasks[i].title.slice(0,40).concat('...').link(`http://localhost:3000/tasks/${res.assigned_tasks[i].id}`),
-              taskIndividual: res.assigned_tasks[i].owner_id.first_name,
             }
           )
         }
@@ -36,9 +46,13 @@ $(document).on('turbolinks:load', function(){
       for (let i = 0; i < res.owned_tasks.length; i++) {
         tasksOtherOweMe.push(
           {
+            status: res.owned_tasks[i].status,
+            title: res.owned_tasks[i].title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${res.owned_tasks[i].id}`),
+            // description: res.owned_tasks[i].description.slice(0,240).concat('...'),
+            taskResponsibleOwner: `${res.owned_tasks[i].assignee_info.first_name} ${res.assigned_tasks[i].assignee_info.last_name}`,
+            createdDate: res.owned_tasks[i].created_date,
+            dueDate: res.owned_tasks[i].due_date,
             id: res.owned_tasks[i].id,
-            title: res.owned_tasks[i].title.slice(0,40).concat('...').link(`http://localhost:3000/tasks/${res.owned_tasks[i].id}`),
-            taskIndividual: res.owned_tasks[i].assignee_id.first_name,
           }
         )
       };
@@ -51,43 +65,54 @@ $(document).on('turbolinks:load', function(){
       // createTasksTable(tasksCreatedForMyself, '#tasks_created_for_myself', )
     });
   }
-  if ( window.location.href !== 'http://localhost:3000/' ) {
-    renderAllTasks();
+  if ( window.location.href === `http://localhost:3000/users/${document.cookie.split('id=')[1]}` ) {
+    renderAllTasksForOneUser();
   }
 
-
-
-  function createTasksTable (tasksAssignedToMe, tableType, taskOwnerAssignee){
-    console.log('createTableTasksAssignedToMe - ', tasksAssignedToMe);
-    $(tableType).bootstrapTable({
+  function createTasksTable (taskData, tableIdFor, tableType){
+    console.log('createTableTasksAssignedToMe - ', tableType);
+    $(tableIdFor).bootstrapTable({
       columns: [
         {
-          field: 'id',
-          title: 'Task ID',
+          field: 'status',
+          title: 'Status',
           sortable: 'true',
           width: '10%',
-          // events: this.addEventListener('click', editCellInTable),
         }, {
           field: 'title',
-          title: 'title',
+          title: 'Title',
           sortable: 'true',
-          width: '45%',
-        }, {
-          field: 'taskIndividual',
-          title: taskOwnerAssignee,
-          sortable: 'true',
-          width: '45%',
-          // editable: {
-          //           type: 'select',
-          //           source: [
-          //               {value: 'active', text: 'Active'},
-          //               {value: 'blocked', text: 'Blocked'},
-          //               {value: 'deleted', text: 'Deleted'}
-          //           ]
-          //       }
+          width: '50%',
         },
+        // {
+        //   field: 'description',
+        //   title: 'Description',
+        //   sortable: 'true',
+        //   width: '10%',
+        // },
+        {
+          field: 'taskResponsibleOwner',
+          title: 'Responsible',
+          sortable: 'true',
+          width: '10%',
+        }, {
+          field: 'createdDate',
+          title: 'Created Date',
+          sortable: 'true',
+          width: '10%',
+        }, {
+          field: 'dueDate',
+          title: 'Due Date',
+          sortable: 'true',
+          width: '10%',
+        }, {
+          field: 'id',
+          title: 'id',
+          sortable: 'true',
+          width: '10%',
+        }
       ],
-      data: tasksAssignedToMe,
+      data: taskData,
       showHeader: 'true',
       pagination: 'true',
       pageSize: '20',
@@ -182,3 +207,12 @@ $('.create-task-button').on('click', createNewTask);
   //     data: tasksAssignedToMe
   // });
   // }
+
+
+  // title: function(tableIdFor) {
+  //   if ( tableIdFor === '#tasks_assigned_to_me' ) {
+  //   return 'Task Owner';
+  //   } else if ( tableIdFor === '#tasks_others_owe_me' ) {
+  //   return 'Hello';
+  //   }
+  // },
