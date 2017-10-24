@@ -1,0 +1,31 @@
+<div class="container create-task">
+  <%= form_for @task do |f| %>
+    <div class="field">
+      <
+      <%= f.label :title %><br />
+      <%= f.text_field :title, maxlength: 25 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_field :description, maxlength: 200 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :assignee_id %><br />
+      <%= f.number_field :assignee_id, max: 25 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :owner_id %><br />
+      <%= f.number_field :owner_id %>
+    </div>
+
+    <div class="field">
+      <%= f.label :creator_id %><br />
+      <%= f.number_field :creator_id  %>
+    </div>
+
+    <%= f.submit "Add Task", class: "btn create-task-button" %>
+  <% end %>
+</div>

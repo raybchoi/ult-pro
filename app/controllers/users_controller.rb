@@ -10,13 +10,13 @@ class UsersController < ApplicationController
     @owned_tasks = @user.owned_tasks.all
     @assigned_tasks = @user.assigned_tasks
     @owned_tasks_json = @user.owned_tasks.all.to_json
-
   end
 
   def new
   end
 
   def create
+
   end
 
   def edit

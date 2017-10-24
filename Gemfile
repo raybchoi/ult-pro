@@ -53,6 +53,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # bootstrap:
 # gem 'bootstrap', '~> 4.0.0.beta2'
 # adding jquery-rails
-gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'jquery-rails'
 # https://github.com/arches/table_print
 gem "table_print"
+# https://github.com/cyu/rack-cors for API usage
+gem 'rack-cors', :require => 'rack/cors'
