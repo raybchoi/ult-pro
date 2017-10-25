@@ -137,7 +137,8 @@ $(document).on('turbolinks:load', function(){
       classes: "table table-hover"
     });
   };
-
+$('#create-task-date-picker').datepicker({
+  });
 
 let createNewTask = function() {
   // go and get each of the value from the input field. The initial value of each field was populated automatically by using the 'value=' in the input tag of the html
