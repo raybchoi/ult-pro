@@ -14,6 +14,8 @@
 //= require turbolinks
 //= require jquery
 //= require jquery_ujs
+//= require jquery.atwho
+//= require typeahead.bundle.min
 //= require_tree .
 //= require bootstrap-sprockets
 //= require bootstrap-table

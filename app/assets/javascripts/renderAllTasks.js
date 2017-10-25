@@ -71,140 +71,72 @@ $(document).on('turbolinks:load', function(){
   };
 
 
-  console.log('tasksOtherOweMe - ', tasksOtherOweMe);
-  console.log('tasksAssignedToMe - ', tasksAssignedToMe);
-  console.log('tasksCreatedForMyself - ', tasksCreatedForMyself);
-  createTasksTable(tasksAssignedToMe, '#tasks_assigned_to_me')
-  createTasksTable(tasksOtherOweMe, '#tasks_others_owe_me')
-  createTasksTable(tasksCreatedForMyself, '#my_own_tasks')
-});
-}
-
-if ( window.location.href === `http://localhost:3000/users/${document.cookie.split('id=')[1]}` ) {
-  renderAllTasksForOneUser();
-}
-
-function createTasksTable (taskData, tableIdFor){
-
-  console.log('createTableTasksAssignedToMe - ', tableIdFor);
-  $(tableIdFor).bootstrapTable({
-    columns: [
-      {
-        field: 'status',
-        title: 'Status',
-        sortable: 'true',
-        width: '10%',
-      }, {
-        field: 'title',
-        title: 'Title',
-        sortable: 'true',
-        width: '15%',
-      },
-      {
-        field: 'description',
-        title: 'Description',
-        sortable: 'true',
-        width: '35%',
-      },
-      {
-        field: 'taskResponsibleOwner',
-        title: 'Responsible',
-        sortable: 'true',
-        width: '10%',
-      }, {
-        field: 'createdDate',
-        title: 'Created Date',
-        sortable: 'true',
-        width: '10%',
-      }, {
-        field: 'dueDate',
-        title: 'Due Date',
-        sortable: 'true',
-        width: '10%',
-      }, {
-        field: 'id',
-        title: 'id',
-        sortable: 'true',
-        width: '10%',
-      }
-    ],
-    data: taskData,
-    showHeader: 'true',
-    pagination: 'true',
-    pageSize: '20',
-    pageList: [1,10,25,'all'],
-    striped: 'true',
-    classes: "table table-hover"
+    console.log('tasksOtherOweMe - ', tasksOtherOweMe);
+    console.log('tasksAssignedToMe - ', tasksAssignedToMe);
+    console.log('tasksCreatedForMyself - ', tasksCreatedForMyself);
+    createTasksTable(tasksAssignedToMe, '#tasks_assigned_to_me')
+    createTasksTable(tasksOtherOweMe, '#tasks_others_owe_me')
+    createTasksTable(tasksCreatedForMyself, '#my_own_tasks')
   });
-};
-$('#create-task-date-picker').datepicker({
-  keyboardNavigation: false,
-  forceParse: false,
-  autoclose: true,
-  todayHighlight: true,
-});
-$('#task-type').on('change', function() {
-  let currentSelectedBox = $('#task-type').find(":selected").val()
-  // console.log($('#task-type').find(":selected").val())
-  if ( currentSelectedBox === "#my_own_tasks" ) {
-      $("#task-assignee_id").prop('disabled', true);
-      $("#task-assignee_id").val(`${document.cookie.split('id=')[1]}`);
-      // disable and set the value to the new user ID
-  } else if ( currentSelectedBox === "#tasks_others_owe_me" ) {
-    $("#task-assignee_id").prop('disabled', false);
-    $("#task-assignee_id").val('');
   }
-})
 
-// console.log('EPIOCH TIME,', moment.unix(1508828400).format("MM/DD/YY"));
+  if ( window.location.href === `http://localhost:3000/users/${document.cookie.split('id=')[1]}` ) {
+    renderAllTasksForOneUser();
+  }
 
-$('#form-create-new-task').on('submit', function() {
-  event.preventDefault();
-  // go and get each of the value from the input field. The initial value of each field was populated automatically by using the 'value=' in the input tag of the html
-  let getSelectDropDownID = document.getElementById("task-type")
-  let tableType = getSelectDropDownID.options[getSelectDropDownID.selectedIndex].value;
-  let newTaskInfo = { task:
-    {
-      title: $('#task-title').val(),
-      description: $('#task-description').val(),
-      assignee_id: $('#task-assignee_id').val(),
-      owner_id: `${document.cookie.split('id=')[1]}`,
-      status: 'Open',
-      // due_date: new Date($('#create-task-date-picker').val())
-      due_date: new Date($('#create-task-date-picker').val()).getTime(),
-    },
-  };
-  console.log(newTaskInfo);
+  function createTasksTable (taskData, tableIdFor){
 
-  $.ajax({
-    method: 'POST',
-    url: `/tasks`,
-    data: newTaskInfo,
-    success: function(newlyCreatedTaskData) {
-      console.log('DATA returned from createNewTask', newlyCreatedTaskData);
-      console.log('THIS IS THE TABLE TYPE', tableType);
-      $(tableType).bootstrapTable('insertRow', {
-        index: 0,
-        row: {
-          status: newlyCreatedTaskData.status,
-          title: newlyCreatedTaskData.title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${newlyCreatedTaskData.id}`),
-          description: newlyCreatedTaskData.description.slice(0,240).concat('...'),
-          taskResponsibleOwner: `${newlyCreatedTaskData.assignee_info.first_name} ${newlyCreatedTaskData.assignee_info.last_name}`,
-          createdDate:  moment(newlyCreatedTaskData.created_date).format("MM/DD/YY"),
-          dueDate: moment(newlyCreatedTaskData.due_date).format("MM/DD/YY"),
-          id: newlyCreatedTaskData.id,
+    console.log('createTableTasksAssignedToMe - ', tableIdFor);
+    $(tableIdFor).bootstrapTable({
+      columns: [
+        {
+          field: 'status',
+          title: 'Status',
+          sortable: 'true',
+          width: '10%',
+        }, {
+          field: 'title',
+          title: 'Title',
+          sortable: 'true',
+          width: '15%',
+        },
+        {
+          field: 'description',
+          title: 'Description',
+          sortable: 'true',
+          width: '35%',
+        },
+        {
+          field: 'taskResponsibleOwner',
+          title: 'Responsible',
+          sortable: 'true',
+          width: '10%',
+        }, {
+          field: 'createdDate',
+          title: 'Created Date',
+          sortable: 'true',
+          width: '10%',
+        }, {
+          field: 'dueDate',
+          title: 'Due Date',
+          sortable: 'true',
+          width: '10%',
+        }, {
+          field: 'id',
+          title: 'id',
+          sortable: 'true',
+          width: '10%',
         }
-      });
-      $('#form-create-new-task')[0].reset();
-    },
-    error: function(err) {
-      console.log('ERROR during the createNewUser returned data', err);
-    }
-  });
-
-});
-
-
+      ],
+      data: taskData,
+      showHeader: 'true',
+      pagination: 'true',
+      pageSize: '20',
+      pageList: [1,10,25,'all'],
+      striped: 'true',
+      classes: "table table-hover"
+    });
+  };
 
 // end of document.ready
 });

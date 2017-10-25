@@ -66,3 +66,5 @@ gem 'momentjs-rails', '~> 2.17', '>= 2.17.1'
 gem "bootstrap-table-rails"
 # https://github.com/Nerian/bootstrap-datepicker-rails
 gem 'bootstrap-datepicker-rails'
+# https://github.com/ichord/jquery-atwho-rails/
+gem 'jquery-atwho-rails', '~> 1.3', '>= 1.3.2'

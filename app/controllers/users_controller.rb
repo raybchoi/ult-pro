@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:edit, :show, :update]
 
   def index
-    @users = User.all
+    @users = User.where(company: current_user.company)
   end
 
   def show
