@@ -10,28 +10,31 @@
 
 
   <div class="container create-task">
-    <label for="task-type">Who is this for?</label>
-    <select name="taskTypeList" class='tableFor' id="task-type">
-      <option value="#tasks_others_owe_me" id='table-type-for-task' >Someone Else</option>
-      <option value="#my_own_tasks" id='table-type-for-task' >Me</option>
-    </select>
+    <form id='form-create-new-task' name='form-create-new-task'>
+      <label for="task-type">Who is this for?</label>
+      <select name="taskTypeList" class='tableFor' id="task-type">
+        <option value="#tasks_others_owe_me" id='table-type-for-task' >Someone Else</option>
+        <option value="#my_own_tasks" id='table-type-for-task' >Me</option>
+      </select>
 
-    <label for="task-assignee_id">assignee_id</label>
-    <input type='number' id='task-assignee_id' maxlength=25/>
+      <label for="task-assignee_id">assignee_id</label>
+      <input type='number' id='task-assignee_id' maxlength=25 required/>
 
-    <label for="task-title">Title</label>
-    <input type='text' id='task-title' maxlength=25/>
-    <label for="task-description">Description</label>
-    <input type='text' id='task-description' maxlength=200/>
-    <input id="create-task-date-picker" class="form-control">
+      <label for="task-title">Title</label>
+      <input type='text' id='task-title' maxlength=25 required/>
+      <label for="task-description">Description</label>
+      <input type='text' id='task-description' maxlength=200 required/>
+      <label for="create-task-date-picker">When is this due?</label>
+      <input type='text' id="create-task-date-picker" placeholder='mm/dd/yyyy' required>
 
-    <!-- <label for="task-owner_id">owner_id</label> -->
-    <!-- <input type='number' id='task-owner_id' maxlength=25/> -->
+      <!-- <label for="task-owner_id">owner_id</label> -->
+      <!-- <input type='number' id='task-owner_id' maxlength=25/> -->
 
-    <!-- <label for="task-creator_id">creator_id</label>
-    <input type='number' id='task-creator_id' maxlength=25/> -->
+      <!-- <label for="task-creator_id">creator_id</label>
+      <input type='number' id='task-creator_id' maxlength=25/> -->
 
-    <button type='submit' class='btn create-task-button'>Create New Task</button>
+      <button type='submit' class='btn create-task-button'>Create New Task</button>
+    </form>
   </div>
 
   <%= render '/users/tasks'%>

@@ -50,8 +50,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# bootstrap:
-# gem 'bootstrap', '~> 4.0.0.beta2'
+# bootstrap: https://github.com/twbs/bootstrap-sass
+gem 'bootstrap-sass', '~> 3.3.7'
 # adding jquery-rails
 gem 'jquery-rails'
 # https://github.com/arches/table_print
@@ -62,5 +62,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'devise'
 # moments JS
 gem 'momentjs-rails', '~> 2.17', '>= 2.17.1'
-# bootstrap table
+# bootstrap table https://github.com/bjevanchiu/bootstrap-table-rails/
 gem "bootstrap-table-rails"
+# https://github.com/Nerian/bootstrap-datepicker-rails
+gem 'bootstrap-datepicker-rails'
