@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20171020044017) do
     t.string "notes"
     t.string "delete_flag"
     t.string "remove_from_view"
-    t.date "meeting_date"
+    t.bigint "meeting_date"
     t.integer "minute_creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -40,12 +40,10 @@ ActiveRecord::Schema.define(version: 20171020044017) do
     t.string "description"
     t.string "status"
     t.string "delete_flag"
-    t.date "due_date"
-    t.date "assigned_date"
-    t.date "completed_date"
+    t.bigint "due_date"
+    t.bigint "completed_date"
     t.integer "owner_id"
     t.integer "assignee_id"
-    t.integer "creator_id"
     t.integer "minute_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,6 +80,5 @@ ActiveRecord::Schema.define(version: 20171020044017) do
   add_foreign_key "minutes", "users", column: "minute_creator_id"
   add_foreign_key "tasks", "minutes"
   add_foreign_key "tasks", "users", column: "assignee_id"
-  add_foreign_key "tasks", "users", column: "creator_id"
   add_foreign_key "tasks", "users", column: "owner_id"
 end

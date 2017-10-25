@@ -1,10 +1,10 @@
-json.extract! @task, :id, :title, :description, :status, :delete_flag, :due_date, :assigned_date, :completed_date
+json.extract! @task, :id, :title, :description, :status, :delete_flag, :due_date, :completed_date
 
 json.url task_url(@task, format: :json)
 
 json.assignee_info @task.assignee
 json.owner_info @task.owner
-json.creator_info @task.creator
+# json.creator_info @task.creator
 
 if @task.minute
   json.minute_info do

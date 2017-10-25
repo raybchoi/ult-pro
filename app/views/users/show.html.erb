@@ -13,8 +13,8 @@
     <form id='form-create-new-task' name='form-create-new-task'>
       <label for="task-type">Who is this for?</label>
       <select name="taskTypeList" class='tableFor' id="task-type">
-        <option value="#tasks_others_owe_me" id='table-type-for-task' >Someone Else</option>
-        <option value="#my_own_tasks" id='table-type-for-task' >Me</option>
+        <option value="#tasks_others_owe_me" id='table-type-for-task' class='tasks_others_owe_me'>Someone Else</option>
+        <option value="#my_own_tasks" id='table-type-for-task' class='my_own_tasks'>Me</option>
       </select>
 
       <label for="task-assignee_id">assignee_id</label>
@@ -51,37 +51,19 @@
           <p>Title: <%= owned_task.title %></p>
           <p>Description: <%= owned_task.description %></p>
           <p>Due Date: <%= owned_task.due_date %></p>
-          <p>assigned_date: <%= owned_task.assigned_date %></p>
+
           <p>completed_date: <%= owned_task.completed_date %></p>
           <p>minute_id: <%= owned_task.minute_id %></p>
           <p>Owner of the owned_task (owner_id): <%= owned_task.owner_id %></p>
           <p>Who the owned_task is assigned to (assignee_id): <%= owned_task.assignee_id %></p>
-          <p>Creator of owned_task (creator_id): <%= owned_task.creator_id %></p>
+
           <p>Associated Minute: <%= owned_task.minute_id %></p>
         </div>
         <hr>
       <% end %>
   </div>
 
-  <div>
-    <h4> Tasks that I created </h4>
-    <hr>
-      <% @created_tasks.each do |created_task| %>
-        <div>
-          <p>Title: <%= created_task.title %></p>
-          <p>Description: <%= created_task.description %></p>
-          <p>Due Date: <%= created_task.due_date %></p>
-          <p>assigned_date: <%= created_task.assigned_date %></p>
-          <p>completed_date: <%= created_task.completed_date %></p>
-          <p>minute_id: <%= created_task.minute_id %></p>
-          <p>Owner of the created_task (owner_id): <%= created_task.owner_id %></p>
-          <p>Who the created_task is assigned to (assignee_id): <%= created_task.assignee_id %></p>
-          <p>Creator of created_task (creator_id): <%= created_task.creator_id %></p>
-          <p>Associated Minute: <%= created_task.minute_id %></p>
-        </div>
-        <hr>
-      <% end %>
-  </div>
+
 
   <div>
     <h4> Tasks that are Assigned to me </h4>
@@ -91,12 +73,12 @@
           <p>Title: <%= assigned_task.title %></p>
           <p>Description: <%= assigned_task.description %></p>
           <p>Due Date: <%= assigned_task.due_date %></p>
-          <p>assigned_date: <%= assigned_task.assigned_date %></p>
+
           <p>completed_date: <%= assigned_task.completed_date %></p>
           <p>minute_id: <%= assigned_task.minute_id %></p>
           <p>Owner of the assigned_task (owner_id): <%= assigned_task.owner_id %></p>
           <p>Who the assigned_task is assigned to (assignee_id): <%= assigned_task.assignee_id %></p>
-          <p>Creator of assigned_task (creator_id): <%= assigned_task.creator_id %></p>
+
           <p>Associated Minute: <%= assigned_task.minute_id %></p>
         </div>
         <hr>

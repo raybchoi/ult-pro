@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # allows for User.first.owned_tasks (get tasks) - allows for User.first.owned_tasks.first.minute - User.first.owned_tasks.first.minute.title
   has_many :owned_tasks, :class_name => "Task", :foreign_key => "owner_id", dependent: :destroy
   has_many :assigned_tasks, :class_name => "Task", :foreign_key => "assignee_id", dependent: :destroy
-  has_many :created_tasks, :class_name => "Task", :foreign_key => "creator_id", dependent: :destroy
+  # has_many :created_tasks, :class_name => "Task", :foreign_key => "creator_id", dependent: :destroy
 
   # included in (attendees) - User.first.created_tasks.first.minute.attendees
   # User.second.created_tasks.first.minute.attendees.first.user

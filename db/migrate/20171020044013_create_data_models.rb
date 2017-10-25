@@ -6,12 +6,12 @@ class CreateDataModels < ActiveRecord::Migration[5.1]
       t.string :description
       t.string :status
       t.string :delete_flag
-      t.date :due_date
-      t.date :assigned_date
-      t.date :completed_date
+      t.bigint :due_date
+      # t.integer :assigned_date
+      t.bigint :completed_date
       t.integer :owner_id
       t.integer :assignee_id
-      t.integer :creator_id
+      # t.integer :creator_id
       t.integer :minute_id
       t.timestamps
     end
@@ -21,7 +21,7 @@ class CreateDataModels < ActiveRecord::Migration[5.1]
       t.string :notes
       t.string :delete_flag
       t.string :remove_from_view
-      t.date :meeting_date
+      t.bigint :meeting_date
       t.integer :minute_creator_id
       t.timestamps
     end
