@@ -62,3 +62,5 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'devise'
 # moments JS
 gem 'momentjs-rails', '~> 2.17', '>= 2.17.1'
+# bootstrap table
+gem "bootstrap-table-rails"

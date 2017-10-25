@@ -15,4 +15,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require bootstrap-table
 //= require moment
