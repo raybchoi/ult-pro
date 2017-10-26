@@ -11,10 +11,9 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
-
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap-table';
  @import 'bootstrap-datepicker3';
- @import 'jquery.atwho';
+ 

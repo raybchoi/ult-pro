@@ -10,6 +10,8 @@
   </div>
 
 
+  <hr>
+
   <div class="container create-task">
     <form id='form-create-new-task' name='form-create-new-task'>
       <label for="task-type">Who is this for?</label>
@@ -22,7 +24,9 @@
 
 
       <label for="task-assignee_id">assignee_id</label>
-      <input type='text' id='task-assignee_id' autocomplete="off" required/>
+
+      <div id='task-assignee_id' class="inputor" contentEditable="true" autocomplete="off" data-role='tagsinput'></div>
+
 
       <label for="task-title">Title</label>
       <input type='text' id='task-title' autocomplete="off" maxlength=25 required/>

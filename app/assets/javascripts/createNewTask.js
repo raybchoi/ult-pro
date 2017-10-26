@@ -12,26 +12,74 @@ $(document).on('turbolinks:load', function(){
         var at_config = {
           at: "@",
           data: res,
-          headerTpl: '<div class="atwho-header">Member List<small>↑&nbsp;↓&nbsp;</small></div>',
-          insertTpl: "${atwho-at}${first_name} ${last_name} - ${email}",
+          insertTpl: "<span data-user-id='${id}' class='badge badge-pill badge-secondary task-created' id='task-assigned-to'>${atwho-at}${first_name} ${last_name} - ${email}</span>",
           displayTpl: "<li>${first_name} ${last_name}<small> ${email}</small></li> ",
           limit: 200
         }
         $('#task-assignee_id').atwho(at_config).atwho('run')
+        // $('#task-assignee_id').on('change', function() {
+        //   let findByEmail = $('#task-assignee_id').val().split(' ')[3]
+        //   console.log(findByEmail);
+        //   for ( let i = 0; i < res.length; i++ ) {
+        //     if ( findByEmail === res[i].name ) {
+        //       console.log('this is the name and the ID - ', res[i].email, res[i].id)
+        //     }
+        //   }
+        // });
+
         $('#task-assignee_id').on('change', function() {
-          let findByEmail = $('#task-assignee_id').val().split(' ')[3]
-          console.log(findByEmail);
-          for ( let i = 0; i < res.length; i++ ) {
-            if ( findByEmail === res[i].name ) {
-              console.log('this is the name and the ID - ', res[i].email, res[i].id)
-            }
+          console.log(document.getElementsByClassName("atwho-inserted"));
+          if (document.getElementById("atwho-inserted").childNodes[0] === '<span>' ) {
+            console.log('hello');
           }
+          $('#task-assignee_id').on('DOMNodeInserted', function(event){
+            console.log('hello');
+            let parentId = document.getElementById("#task-assignee_id").childNodes.length;
+            console.log('this is what');
+            // if( event.target.parentNode.id == 'task-assignee_id') {
+            //   console.log($('#task-assignee_id').childNodes);
+            // };
+          });
         });
+
+        // var c = document.getElementById("myDIV").childNodes.length;
+        // document.getElementById("demo").innerHTML = c;
+
       },
       error: function(err) {
         alert('Sorry! We had an error :(')
       }
     });
+
+    // var ckeditor = $('#task-assignee_id').ckeditor({...}).ckeditorGet();
+    // ckeditor.enableEnter = true; //Use this as a flag
+    //
+    // ckeditor.on('instanceReady',function(event) {
+    //     var at_config = {...};
+    //
+    //    this.document.getBody().$.contentEditable = true;
+    //     $(this.document.getBody().$).atwho(at_config);
+    //     $(this.document.getBody().$).on('shown.atwho', function(event){
+    //         ckeditor.enableEnter = false;
+    //     });
+    //     $(this.document.getBody().$).on('hidden.atwho', function(event){
+    //         setTimeout(function(){
+    //             //console.log("hide! setting to TRUE");
+    //             ckeditor.enableEnter = true;
+    //         },100); //Give it a small time so that the ENTER key only affects the popup and not the editor
+    //     });
+    // });
+    //
+    // ckeditor.on( 'key', function( event ) {
+    //     if ( event.data.keyCode == 13 && !ckeditor.enableEnter ) {
+    //         event.cancel();
+    //     }
+    // });
+    // if (
+      // there is one span on change don't allow value to change
+      // then do not disable but not allow more inputs
+      // on input if input is typed and if someone is mentioned
+    // )
     $('#create-task-date-picker').datepicker({
       keyboardNavigation: false,
       forceParse: false,
@@ -49,8 +97,13 @@ $(document).on('turbolinks:load', function(){
             userName = `@${jsonResponse[i].first_name} ${jsonResponse[i].last_name} - ${jsonResponse[i].email}`
           }
         }
-        $("#task-assignee_id").val(userName);
-        // disable and set the value to the new user ID
+        console.log(userName);
+        $("#task-assignee_id").append(`
+          <span class="atwho-inserted">
+            <span data-user-id=${document.cookie.split('id=')[1]} class='task-created' id='task-assigned-to'>${userName} </span>
+          </span>
+          `)
+          $("#task-assignee_id").prop('disabled', true)
       } else if ( currentSelectedBox === "#tasks_others_owe_me" ) {
         $("#task-assignee_id").prop('disabled', false);
         $("#task-assignee_id").val('');
