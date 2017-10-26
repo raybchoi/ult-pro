@@ -1,6 +1,42 @@
 console.log('User.js file loaded');
 $(document).on('turbolinks:load', function(){
-  // $.fn.editable.defaults.mode = 'inline';
+
+
+
+   $(function(){
+
+     var pizza = ["Jacob Song","Isabella","Ethan","Emma","Michael","Olivia","Alexander","Sophia","William","Ava","Joshua","Emily","Daniel","Madison","Jayden","Abigail","Noah","Chloe","你好","你你你", 'jeremy', "가"];
+     console.log('this is pizz',pizza);
+     let names = $.map(pizza,function(value,i) {
+       return {'id':i,'name':value,'email':value+"@email.com"};
+     });
+     console.log('this is all the names ',names);
+
+      let formatedName = $('#task-assignee_id').val().slice(0, -1)
+
+      var at_config = {
+      at: "@",
+      data: names,
+      headerTpl: '<div class="atwho-header">Member List<small>↑&nbsp;↓&nbsp;</small></div>',
+      insertTpl: '${name}',
+      displayTpl: "<li>${name} <small>${email}</small></li>",
+      limit: 200
+      }
+    $('#task-assignee_id').on('change', function() {
+      for ( let i = 0; i < names.length; i++ ) {
+        console.log(names[i].name);
+        if ( formatedName === names[i].name ) {
+          console.log('this is the name and the ID - ', names[i].name, names[i].id)
+        }
+      }
+   });
+   $('#task-assignee_id').atwho(at_config)
+ });
+
+
+
+
+
 
   $('#create-task-date-picker').datepicker({
     keyboardNavigation: false,
@@ -21,10 +57,7 @@ $(document).on('turbolinks:load', function(){
     }
   })
 
-  $(function(){
-    data = ['tom','john'];
-    $('#task-assignee_id').atwho({at:"@", 'data':data});
-  });
+
 
   // console.log('EPIOCH TIME,', moment.unix(1508828400).format("MM/DD/YY"));
 
@@ -44,7 +77,7 @@ $(document).on('turbolinks:load', function(){
         due_date: new Date($('#create-task-date-picker').val()).getTime(),
       },
     };
-    console.log(newTaskInfo);
+    // console.log(newTaskInfo);
 
     $.ajax({
       method: 'POST',

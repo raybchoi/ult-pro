@@ -1,24 +1,28 @@
 <div>
   <h4> User Info </h4>
-  <div>
+  <div id='big'>
       <p>First Name: <%= @user.first_name %></p>
       <p>Last Name: <%= @user.last_name %></p>
       <p>Email: <%= @user.email %></p>
       <p>Company: <%= @user.company %></p>
       <p>Current User: <%= current_user.id %></p>
+      <p>Current User ID based off of @user: <%= @user.id %></p>
   </div>
 
 
   <div class="container create-task">
     <form id='form-create-new-task' name='form-create-new-task'>
       <label for="task-type">Who is this for?</label>
+
       <select name="taskTypeList" class='tableFor' id="task-type">
         <option value="#tasks_others_owe_me" id='table-type-for-task' class='tasks_others_owe_me'>Someone Else</option>
         <option value="#my_own_tasks" id='table-type-for-task' class='my_own_tasks'>Me</option>
       </select>
 
+
+
       <label for="task-assignee_id">assignee_id</label>
-      <input type='text' id='task-assignee_id' maxlength=25 required/>
+      <input type='text' id='task-assignee_id' required/>
 
       <label for="task-title">Title</label>
       <input type='text' id='task-title' maxlength=25 required/>
@@ -38,52 +42,5 @@
   </div>
 
   <%= render '/users/tasks'%>
-
-
-  <h1>Tasks that I Own</h1>
-  <button class="btn btn-primary">hi</button>
-  <hr>
-  <div>
-    <h4> Tasks that I Own </h4>
-    <hr>
-      <% @owned_tasks.each do |owned_task| %>
-        <div>
-          <p>Title: <%= owned_task.title %></p>
-          <p>Description: <%= owned_task.description %></p>
-          <p>Due Date: <%= owned_task.due_date %></p>
-
-          <p>completed_date: <%= owned_task.completed_date %></p>
-          <p>minute_id: <%= owned_task.minute_id %></p>
-          <p>Owner of the owned_task (owner_id): <%= owned_task.owner_id %></p>
-          <p>Who the owned_task is assigned to (assignee_id): <%= owned_task.assignee_id %></p>
-
-          <p>Associated Minute: <%= owned_task.minute_id %></p>
-        </div>
-        <hr>
-      <% end %>
-  </div>
-
-
-
-  <div>
-    <h4> Tasks that are Assigned to me </h4>
-    <hr>
-      <% @assigned_tasks.each do |assigned_task| %>
-        <div>
-          <p>Title: <%= assigned_task.title %></p>
-          <p>Description: <%= assigned_task.description %></p>
-          <p>Due Date: <%= assigned_task.due_date %></p>
-
-          <p>completed_date: <%= assigned_task.completed_date %></p>
-          <p>minute_id: <%= assigned_task.minute_id %></p>
-          <p>Owner of the assigned_task (owner_id): <%= assigned_task.owner_id %></p>
-          <p>Who the assigned_task is assigned to (assignee_id): <%= assigned_task.assignee_id %></p>
-
-          <p>Associated Minute: <%= assigned_task.minute_id %></p>
-        </div>
-        <hr>
-      <% end %>
-  </div>
-
 
 </div>

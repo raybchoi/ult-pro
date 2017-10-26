@@ -67,4 +67,4 @@ gem "bootstrap-table-rails"
 # https://github.com/Nerian/bootstrap-datepicker-rails
 gem 'bootstrap-datepicker-rails'
 # https://github.com/ichord/jquery-atwho-rails/
-gem 'jquery-atwho-rails', '~> 1.3', '>= 1.3.2'
+gem 'jquery-atwho-rails'

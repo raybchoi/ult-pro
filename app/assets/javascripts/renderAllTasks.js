@@ -18,7 +18,7 @@ $(document).on('turbolinks:load', function(){
       let resOwnedTasks = res.owned_tasks
       let userCookieInformation = parseInt(`${document.cookie.split('id=')[1]}`)
       // console.log('THIS IS USER COOKIE INFO - ', userCookieInformation);
-      console.log(`${document.cookie.split('id=')[1]}`, resAssignedTasks.length + resOwnedTasks.length);
+      // console.log(`${document.cookie.split('id=')[1]}`, resAssignedTasks.length + resOwnedTasks.length);
       for (let i = 0; i < resOwnedTasks.length ; i++) {
         // console.log('MOMENT- ', moment(resAssignedTasks[i].created_date).format("MM/DD/YY"));
         // check to see if the task is assigned to self
@@ -86,7 +86,7 @@ $(document).on('turbolinks:load', function(){
 
   function createTasksTable (taskData, tableIdFor){
 
-    console.log('createTableTasksAssignedToMe - ', tableIdFor);
+    // console.log('createTableTasksAssignedToMe - ', tableIdFor);
     $(tableIdFor).bootstrapTable({
       columns: [
         {
@@ -134,7 +134,9 @@ $(document).on('turbolinks:load', function(){
       pageSize: '20',
       pageList: [1,10,25,'all'],
       striped: 'true',
-      classes: "table table-hover"
+      classes: "table table-hover",
+      sortName: 'dueDate',
+      sortOrder: 'desc'
     });
   };
 

@@ -8,9 +8,9 @@ class UsersController < ApplicationController
   def show
     @user
     # @created_tasks = @user.created_tasks.all
-    @owned_tasks = @user.owned_tasks.all
-    @assigned_tasks = @user.assigned_tasks
-    @owned_tasks_json = @user.owned_tasks.all.to_json
+    # @owned_tasks = @user.owned_tasks.all
+    # @assigned_tasks = @user.assigned_tasks
+    # @owned_tasks_json = @user.owned_tasks.all.to_json
   end
 
   def new
