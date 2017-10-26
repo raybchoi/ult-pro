@@ -20,12 +20,12 @@
 //= require bootstrap-sprockets
 //= require bootstrap-table
 //= require bootstrap-datepicker
-
+//= require bootstrap-notify
 //= require moment
 /**
  * Initialize tagsinput behaviour on inputs and selects which have
  * data-role=tagsinput
  */
  $(document).on('turbolinks:load', function(){
-  $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
+  // $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
 });

@@ -28,6 +28,19 @@ $(document).on('turbolinks:load', function(){
             }
           } else {
             console.log('hello');
+            $.notify({
+            	title: '<strong>Heads up!</strong>',
+            	message: 'You can only add one person to a task.'
+            },{
+            	type: 'warning',
+              timer: 1000,
+              placement: {
+                from: "top",
+                align: "right"
+              },
+            	delay: 5000,
+            	timer: 1000,
+            });
             return false
           };
         });

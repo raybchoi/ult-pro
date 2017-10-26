@@ -7,11 +7,6 @@
     /*color: #4183C4;*/
 }
 
-.code_area_style {
-    width: 400px;
-    height: 100px;
-    border: 1px solid #ccc;
-}
 .template_helper_commands {
     position: absolute;
     display:none;
