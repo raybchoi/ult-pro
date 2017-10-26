@@ -12,128 +12,81 @@ $(document).on('turbolinks:load', function(){
         var at_config = {
           at: "@",
           data: res,
-          insertTpl: "<span data-user-id='${id}' class='badge badge-pill badge-secondary task-created' id='task-assigned-to'>${atwho-at}${first_name} ${last_name} - ${email}</span>",
+          insertTpl: "<span data-user-id='${id}' data-user-name='${first_name} ${last_name}' data-user-email='${email}' class='task-created' id='span-assigned-to'>${atwho-at}${first_name} ${last_name}</span>",
           displayTpl: "<li>${first_name} ${last_name}<small> ${email}</small></li> ",
           limit: 200
         }
-        $('#task-assignee_id').atwho(at_config).atwho('run')
-        // $('#task-assignee_id').on('change', function() {
-        //   let findByEmail = $('#task-assignee_id').val().split(' ')[3]
-        //   console.log(findByEmail);
-        //   for ( let i = 0; i < res.length; i++ ) {
-        //     if ( findByEmail === res[i].name ) {
-        //       console.log('this is the name and the ID - ', res[i].email, res[i].id)
-        //     }
-        //   }
-        // });
-
-        $('#task-assignee_id').on('change', function() {
-          console.log(document.getElementsByClassName("atwho-inserted"));
-          if (document.getElementById("atwho-inserted").childNodes[0] === '<span>' ) {
+        $('#div-task-assignee').atwho(at_config).atwho('run')
+        // only allow @ or " " to be inputted
+        $('#div-task-assignee').on('keypress', function(event) {
+          console.log('this is the div length - ', $('#span-assigned-to').length);
+          if ($('#span-assigned-to').length === 0) {
+            if ( event.keyCode === 64 || event.keyCode === 32 ) {
+              console.log("#div-task-assignee').on('keypress', function(event)")
+            } else {
+            return false;
+            }
+          } else {
             console.log('hello');
-          }
-          $('#task-assignee_id').on('DOMNodeInserted', function(event){
-            console.log('hello');
-            let parentId = document.getElementById("#task-assignee_id").childNodes.length;
-            console.log('this is what');
-            // if( event.target.parentNode.id == 'task-assignee_id') {
-            //   console.log($('#task-assignee_id').childNodes);
-            // };
-          });
+            return false
+          };
         });
-
-        // var c = document.getElementById("myDIV").childNodes.length;
-        // document.getElementById("demo").innerHTML = c;
-
       },
       error: function(err) {
         alert('Sorry! We had an error :(')
       }
     });
 
-    // var ckeditor = $('#task-assignee_id').ckeditor({...}).ckeditorGet();
-    // ckeditor.enableEnter = true; //Use this as a flag
-    //
-    // ckeditor.on('instanceReady',function(event) {
-    //     var at_config = {...};
-    //
-    //    this.document.getBody().$.contentEditable = true;
-    //     $(this.document.getBody().$).atwho(at_config);
-    //     $(this.document.getBody().$).on('shown.atwho', function(event){
-    //         ckeditor.enableEnter = false;
-    //     });
-    //     $(this.document.getBody().$).on('hidden.atwho', function(event){
-    //         setTimeout(function(){
-    //             //console.log("hide! setting to TRUE");
-    //             ckeditor.enableEnter = true;
-    //         },100); //Give it a small time so that the ENTER key only affects the popup and not the editor
-    //     });
-    // });
-    //
-    // ckeditor.on( 'key', function( event ) {
-    //     if ( event.data.keyCode == 13 && !ckeditor.enableEnter ) {
-    //         event.cancel();
-    //     }
-    // });
-    // if (
-      // there is one span on change don't allow value to change
-      // then do not disable but not allow more inputs
-      // on input if input is typed and if someone is mentioned
-    // )
     $('#create-task-date-picker').datepicker({
       keyboardNavigation: false,
       forceParse: false,
       autoclose: true,
       todayHighlight: true,
     });
+
+    // ------- if user hits drop down for me vs someone else -------
     $('#task-type').on('change', function() {
       let currentSelectedBox = $('#task-type').find(":selected").val()
       // console.log($('#task-type').find(":selected").val())
       if ( currentSelectedBox === "#my_own_tasks" ) {
-        $("#task-assignee_id").prop('disabled', true);
-        let userName;
+        $('#div-task-assignee').empty();
         for ( let i = 0; i < jsonResponse.length; i++ ) {
           if ( parseInt(`${document.cookie.split('id=')[1]}`) === jsonResponse[i].id ) {
-            userName = `@${jsonResponse[i].first_name} ${jsonResponse[i].last_name} - ${jsonResponse[i].email}`
+            $("#div-task-assignee").append(`
+              <span class="atwho-inserted">
+                <span data-user-id='${jsonResponse[i].id}' data-user-name='${jsonResponse[i].first_name} ${jsonResponse[i].last_name}'  data-user-email='${jsonResponse[i].email}' class='task-created' id='span-assigned-to'>@${jsonResponse[i].first_name} ${jsonResponse[i].last_name} </span>
+              </span>
+              `)
           }
         }
-        console.log(userName);
-        $("#task-assignee_id").append(`
-          <span class="atwho-inserted">
-            <span data-user-id=${document.cookie.split('id=')[1]} class='task-created' id='task-assigned-to'>${userName} </span>
-          </span>
-          `)
-          $("#task-assignee_id").prop('disabled', true)
+        // need to disable the box and add new div for class
+        $("#div-task-assignee").removeAttr("contenteditable");
+        $("#div-task-assignee").attr("class", "disable-div");
       } else if ( currentSelectedBox === "#tasks_others_owe_me" ) {
-        $("#task-assignee_id").prop('disabled', false);
-        $("#task-assignee_id").val('');
+          // empty the div and re-enable the box and update the class
+          $('#div-task-assignee').empty();
+          $("#div-task-assignee").attr("contenteditable", "true");
+          $("#div-task-assignee").attr("class", "div-assign-task");
       }
     })
+
+
     // console.log('EPIOCH TIME,', moment.unix(1508828400).format("MM/DD/YY"));
+
+
     $('#form-create-new-task').on('submit', function() {
       event.preventDefault();
       // go and get each of the value from the input field. The initial value of each field was populated automatically by using the 'value=' in the input tag of the html
-      let findByEmail = $('#task-assignee_id').val().split(' ')[3]
-      console.log(findByEmail);
-      let assignee_number;
-      console.log('res', jsonResponse);
-      for ( let i = 0; i < jsonResponse.length; i++ ) {
-        if ( findByEmail === jsonResponse[i].email ) {
-          assignee_number = jsonResponse[i].id
-          console.log('this is the name and the ID - ', jsonResponse[i].email, res[i].id)
-        }
-      }
-      console.log('assignee_number - ', assignee_number);
+
       let getSelectDropDownID = document.getElementById("task-type")
       let tableType = getSelectDropDownID.options[getSelectDropDownID.selectedIndex].value;
       let newTaskInfo = { task:
         {
           title: $('#task-title').val(),
           description: $('#task-description').val(),
-          assignee_id: assignee_number,
+          assignee_id: $("#span-assigned-to").attr('data-user-id'),
           owner_id: `${document.cookie.split('id=')[1]}`,
           status: 'Open',
-          // due_date: new Date($('#create-task-date-picker').val())
           due_date: new Date($('#create-task-date-picker').val()).getTime(),
         },
       };
@@ -158,7 +111,7 @@ $(document).on('turbolinks:load', function(){
               id: newlyCreatedTaskData.id,
             }
           });
-          $("#task-assignee_id").prop('disabled', false);
+          $("#div-task-assignee").prop('disabled', false);
           $('#form-create-new-task')[0].reset();
         },
         error: function(err) {
