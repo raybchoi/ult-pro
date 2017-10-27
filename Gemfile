@@ -68,3 +68,4 @@ gem "bootstrap-table-rails"
 gem 'bootstrap-datepicker-rails'
 # https://github.com/ichord/jquery-atwho-rails/
 gem 'jquery-atwho-rails'
+# https://github.com/objectivehtml/FlipClock

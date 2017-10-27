@@ -127,10 +127,9 @@ $(document).on('turbolinks:load', function(){
       pagination: 'true',
       pageSize: '20',
       pageList: [1,10,25,'all'],
-      striped: 'true',
-      classes: "table table-hover",
+      classes: "table table-hover table-condensed",
       sortName: 'dueDate',
-      sortOrder: 'desc'
+      sortOrder: 'desc',
     });
   };
 

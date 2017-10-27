@@ -105,6 +105,7 @@ $(document).on('turbolinks:load', function(){
           delay: 5000,
           timer: 1000,
         });
+        return
       };
       let getSelectDropDownID = document.getElementById("task-type")
       let tableType = getSelectDropDownID.options[getSelectDropDownID.selectedIndex].value;

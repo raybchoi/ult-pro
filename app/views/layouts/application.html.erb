@@ -10,6 +10,7 @@
 
     <!-- CSS -->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet">
 
     <!-- JS Bootstrap 3.3.7 and Bootstrap table and editable-->
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -18,15 +19,15 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-light navbar-static-top" style="background-color: #FEFFC3; margin-bottom: 0%;">
       <div class="container">
         <div class="navbar-header">
-          <%= link_to 'Devise Demo', root_path, class: 'navbar-brand' %>
+          <%= link_to 'Ult Pro', root_path, class: 'navbar-brand' %>
         </div>
         <div id="navbar">
-          <ul class="nav navbar-nav">
+          <!-- <ul class="nav navbar-nav">
             <li><%= link_to 'Home', root_path %></li>
-          </ul>
+          </ul> -->
           <ul class="nav navbar-nav pull-right">
             <% if user_signed_in? %>
             <li class="dropdown">
@@ -48,10 +49,25 @@
       </div>
     </nav>
 
-  <span id="clock"></span>
+
+
+
+    <div>
+      <div class='div-date-time-user-info'>
+        <section class='section-date-time-user-info'>
+            <h1 class='welcome-name'>Hi, <%= @user.first_name %> <h1>
+            <div class="date front-page" id='date'></div>
+            <div class="clock front-page"></div>
+        </section>
+      </div>
+    </div>
 
     <div class='container'>
-      <%= yield %>
+
+
+        <%= yield %>
+
     </div>
+
   </body>
 </html>

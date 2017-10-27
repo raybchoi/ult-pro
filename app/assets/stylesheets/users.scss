@@ -1,29 +1,26 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#big {
-  font-size: 200%;
-  background: cornflowerblue;
-}
-.div-assign-task {
+
+// FOR TASKSS]\\
+.div-task {
   border-style: solid;
   border-color: black;
 }
-
-.bootstrap-tagsinput .tag {
-  color: black;
-}
-
-.disable-div {
-  background-color: pink
-}
-
 .section-tasks {
   position: relative;
   margin-top: 4.5%;
+  // background: image-url('notebook-page.jpg');
+  /* Full width */
+  // width: 100%;
+  /* Center and scale the image nicely */
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // text-align: center;
 }
 .h2-task-header {
-  // this guy is stuck to that guy
+  // this guy is stuck to that guy (using position absolute)
   position: absolute;
   display: inline;
   background: white;
@@ -38,4 +35,40 @@
   border-width: 2px;
   padding: 3.5% 1.5%;
   // margin-top: -2.7%;
+}
+
+.disable-div {
+  background-color: pink
+}
+
+// for date and time - for the clock made updates to the CSS file
+.div-date-time-user-info{
+  // https://unsplash.com/photos/iGAskcHIfVU
+  background: image-url('bg-2.jpg');
+  /* Full width */
+  width: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+
+}
+.section-date-time-user-info {
+  padding-bottom: 10%;
+  color: #E8E8E8;
+}
+
+.date {
+  font-size: 200%;
+  align: center;
+  // margin top and bottom = 5% left and right is 0%
+  margin:5% 0%;
+}
+// to update the clock am / pm updated the flipclock.js line 2319
+// '<span style="color: grey">'+this.meridiumText+'</span>',
+.welcome-name {
+  font-size: 1000%;
+  margin-top: 0%;
+  padding-top: 6%;
 }
