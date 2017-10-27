@@ -21,6 +21,7 @@
 //= require bootstrap-table
 //= require bootstrap-datepicker
 //= require bootstrap-notify
+//= require bootstrap-select.min.js
 //= require moment
 /**
  * Initialize tagsinput behaviour on inputs and selects which have
@@ -28,4 +29,7 @@
  */
  $(document).on('turbolinks:load', function(){
   // $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
+
+  // https://stackoverflow.com/questions/28415178/how-do-you-show-the-current-time-on-a-web-page
+  
 });

@@ -11,12 +11,8 @@
     <!-- CSS -->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-
-
-
     <!-- JS Bootstrap 3.3.7 and Bootstrap table and editable-->
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
 
   </head>
 
@@ -52,7 +48,10 @@
       </div>
     </nav>
 
+  <span id="clock"></span>
 
-    <%= yield %>
+    <div class='container'>
+      <%= yield %>
+    </div>
   </body>
 </html>

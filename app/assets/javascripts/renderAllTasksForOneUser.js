@@ -1,16 +1,12 @@
-console.log('User.js file loaded');
+console.log('renderAllTasksForOneUser.js file loaded');
 $(document).on('turbolinks:load', function(){
-  // $.fn.editable.defaults.mode = 'inline';
-
   function renderAllTasksForOneUser() {
     $.ajax({
       method: 'GET',
       url: `http://localhost:3000/users/${document.cookie.split('id=')[1]}.json`,
     })
     .then(function(res){
-      // let jsonResponse = jsonResponse
-      console.log('Response - ', res);
-
+      // console.log('Response - ', res);
       var tasksAssignedToMe = [];
       var tasksOtherOweMe = [];
       var tasksCreatedForMyself = [];
@@ -69,11 +65,9 @@ $(document).on('turbolinks:load', function(){
       })
     }
   };
-
-
-    console.log('tasksOtherOweMe - ', tasksOtherOweMe);
-    console.log('tasksAssignedToMe - ', tasksAssignedToMe);
-    console.log('tasksCreatedForMyself - ', tasksCreatedForMyself);
+    // console.log('tasksOtherOweMe - ', tasksOtherOweMe);
+    // console.log('tasksAssignedToMe - ', tasksAssignedToMe);
+    // console.log('tasksCreatedForMyself - ', tasksCreatedForMyself);
     createTasksTable(tasksAssignedToMe, '#tasks_assigned_to_me')
     createTasksTable(tasksOtherOweMe, '#tasks_others_owe_me')
     createTasksTable(tasksCreatedForMyself, '#my_own_tasks')
@@ -142,42 +136,3 @@ $(document).on('turbolinks:load', function(){
 
 // end of document.ready
 });
-
-// function editCellInTable() {
-//   console.log(this);
-//   $().editable({
-//       type: 'text',
-//       pk: 1,
-//       url: '/post',
-//       title: 'Enter username'
-//   });
-// }
-
-
-// function createTableTasksAssignedToMe (tasksAssignedToMe){
-//   console.log('createTableTasksAssignedToMe - ', tasksAssignedToMe);
-//   $('#tasks_assigned_to_me').bootstrapTable({
-//     columns: [
-//       {
-//         field: 'id',
-//         title: 'Item ID'
-//       }, {
-//         field: 'title',
-//         title: 'title'
-//       }, {
-//         field: 'taskOwner',
-//         title: 'task owner'
-//       },
-//     ],
-//     data: tasksAssignedToMe
-// });
-// }
-
-
-// title: function(tableIdFor) {
-//   if ( tableIdFor === '#tasks_assigned_to_me' ) {
-//   return 'Task Owner';
-//   } else if ( tableIdFor === '#tasks_others_owe_me' ) {
-//   return 'Hello';
-//   }
-// },

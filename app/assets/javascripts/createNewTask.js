@@ -1,4 +1,4 @@
-console.log('User.js file loaded');
+// console.log('createNewTask.js file loaded');
 $(document).on('turbolinks:load', function(){
   // initial ajax call
   function getAllUsers() {
@@ -8,7 +8,7 @@ $(document).on('turbolinks:load', function(){
       url: `/users.json`,
       success: function(res) {
         jsonResponse = res
-        console.log('all users - ', jsonResponse);
+        // console.log('all users - ', jsonResponse);
         var at_config = {
           at: "@",
           data: res,
@@ -19,15 +19,15 @@ $(document).on('turbolinks:load', function(){
         $('#div-task-assignee').atwho(at_config).atwho('run')
         // only allow @ or " " to be inputted
         $('#div-task-assignee').on('keypress', function(event) {
-          console.log('this is the div length - ', $('#span-assigned-to').length);
+          // console.log('this is the div length - ', $('#span-assigned-to').length);
           if ($('#span-assigned-to').length === 0) {
             if ( event.keyCode === 64 || event.keyCode === 32 ) {
-              console.log("#div-task-assignee').on('keypress', function(event)")
+              // console.log("#div-task-assignee').on('keypress', function(event)")
             } else {
             return false;
             }
           } else {
-            console.log('hello');
+            // console.log('hello');
             $.notify({
             	title: '<strong>Heads up!</strong>',
             	message: 'You can only add one person to a task.'
@@ -49,6 +49,11 @@ $(document).on('turbolinks:load', function(){
         alert('Sorry! We had an error :(')
       }
     });
+    function resetFormToBeginning() {
+      $('#div-task-assignee').empty();
+      $("#div-task-assignee").attr("contenteditable", "true");
+      $("#div-task-assignee").attr("class", "div-assign-task");
+    }
 
     $('#create-task-date-picker').datepicker({
       keyboardNavigation: false,
@@ -77,20 +82,30 @@ $(document).on('turbolinks:load', function(){
         $("#div-task-assignee").attr("class", "disable-div");
       } else if ( currentSelectedBox === "#tasks_others_owe_me" ) {
           // empty the div and re-enable the box and update the class
-          $('#div-task-assignee').empty();
-          $("#div-task-assignee").attr("contenteditable", "true");
-          $("#div-task-assignee").attr("class", "div-assign-task");
+          resetFormToBeginning();
       }
     })
 
-
     // console.log('EPIOCH TIME,', moment.unix(1508828400).format("MM/DD/YY"));
-
 
     $('#form-create-new-task').on('submit', function() {
       event.preventDefault();
       // go and get each of the value from the input field. The initial value of each field was populated automatically by using the 'value=' in the input tag of the html
-
+      if ($('#span-assigned-to').length === 0) {
+        $.notify({
+          title: '<strong>Uh oh!</strong>',
+          message: 'You need to assign a task to a person!'
+        },{
+          type: 'danger',
+          timer: 1000,
+          placement: {
+            from: "top",
+            align: "right"
+          },
+          delay: 5000,
+          timer: 1000,
+        });
+      };
       let getSelectDropDownID = document.getElementById("task-type")
       let tableType = getSelectDropDownID.options[getSelectDropDownID.selectedIndex].value;
       let newTaskInfo = { task:
@@ -110,8 +125,8 @@ $(document).on('turbolinks:load', function(){
         url: `/tasks`,
         data: newTaskInfo,
         success: function(newlyCreatedTaskData) {
-          console.log('DATA returned from createNewTask', newlyCreatedTaskData);
-          console.log('THIS IS THE TABLE TYPE', tableType);
+          // console.log('DATA returned from createNewTask', newlyCreatedTaskData);
+          // console.log('THIS IS THE TABLE TYPE', tableType);
           $(tableType).bootstrapTable('insertRow', {
             index: 0,
             row: {
@@ -124,11 +139,11 @@ $(document).on('turbolinks:load', function(){
               id: newlyCreatedTaskData.id,
             }
           });
-          $("#div-task-assignee").prop('disabled', false);
           $('#form-create-new-task')[0].reset();
+          resetFormToBeginning();
         },
         error: function(err) {
-          console.log('ERROR during the createNewUser returned data', err);
+          // console.log('ERROR during the createNewUser returned data', err);
         }
         // end of post ajax
       });

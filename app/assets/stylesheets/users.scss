@@ -17,3 +17,25 @@
 .disable-div {
   background-color: pink
 }
+
+.section-tasks {
+  position: relative;
+  margin-top: 4.5%;
+}
+.h2-task-header {
+  // this guy is stuck to that guy
+  position: absolute;
+  display: inline;
+  background: white;
+  z-index: 2;
+  margin-left: 5%;
+  margin-top: -2%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.div-tasks {
+  border: solid;
+  border-width: 2px;
+  padding: 3.5% 1.5%;
+  // margin-top: -2.7%;
+}
