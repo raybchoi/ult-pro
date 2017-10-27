@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', function(){
           {
             status: resOwnedTasks[i].status,
             title: resOwnedTasks[i].title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${resOwnedTasks[i].id}`),
-            description: resOwnedTasks[i].description.slice(0,240).concat('...'),
+            description: resOwnedTasks[i].description.slice(0,100).concat('...'),
             taskResponsibleOwner: `${resOwnedTasks[i].owner_info.first_name} ${resOwnedTasks[i].owner_info.last_name}`,
             createdDate: moment(resOwnedTasks[i].created_date).format("MM/DD/YY"),
             dueDate: moment(resOwnedTasks[i].due_date).format("MM/DD/YY"),
@@ -41,7 +41,7 @@ $(document).on('turbolinks:load', function(){
           {
             status: resOwnedTasks[i].status,
             title: resOwnedTasks[i].title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${resOwnedTasks[i].id}`),
-            description: resOwnedTasks[i].description.slice(0,240).concat('...'),
+            description: resOwnedTasks[i].description.slice(0,100).concat('...'),
             taskResponsibleOwner: `${resOwnedTasks[i].assignee_info.first_name} ${resOwnedTasks[i].assignee_info.last_name}`,
             createdDate:  moment(resOwnedTasks[i].created_date).format("MM/DD/YY"),
             dueDate: moment(resOwnedTasks[i].due_date).format("MM/DD/YY"),
@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', function(){
       tasksAssignedToMe.push({
         status: resAssignedTasks[i].status,
         title: resAssignedTasks[i].title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${resAssignedTasks[i].id}`),
-        description: resAssignedTasks[i].description.slice(0,240).concat('...'),
+        description: resAssignedTasks[i].description.slice(0,100).concat('...'),
         taskResponsibleOwner: `${resAssignedTasks[i].owner_info.first_name} ${resAssignedTasks[i].owner_info.last_name}`,
         createdDate: moment(resAssignedTasks[i].created_date).format("MM/DD/YY"),
         dueDate: moment(resAssignedTasks[i].due_date).format("MM/DD/YY"),
@@ -92,42 +92,43 @@ $(document).on('turbolinks:load', function(){
           field: 'title',
           title: 'Title',
           sortable: 'true',
-          width: '15%',
+          width: '35%',
         },
         {
           field: 'description',
           title: 'Description',
           sortable: 'true',
-          width: '35%',
+          width: '40%',
         },
         {
           field: 'taskResponsibleOwner',
           title: 'Responsible',
           sortable: 'true',
-          width: '10%',
+          width: '5%',
         }, {
           field: 'createdDate',
           title: 'Created Date',
           sortable: 'true',
-          width: '10%',
+          width: '5%',
         }, {
           field: 'dueDate',
           title: 'Due Date',
           sortable: 'true',
-          width: '10%',
-        }, {
-          field: 'id',
-          title: 'id',
-          sortable: 'true',
-          width: '10%',
-        }
+          width: '5%',
+        },
+        // {
+        //   field: 'id',
+        //   title: 'id',
+        //   sortable: 'true',
+        //   width: '10%',
+        // }
       ],
       data: taskData,
       showHeader: 'true',
       pagination: 'true',
       pageSize: '20',
       pageList: [1,10,25,'all'],
-      classes: "table table-hover table-condensed",
+      classes: "table table-hover table-condensed table-no-bordered",
       sortName: 'dueDate',
       sortOrder: 'desc',
     });
