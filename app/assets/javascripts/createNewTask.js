@@ -1,4 +1,4 @@
-// console.log('createNewTask.js file loaded');
+console.log('createNewTask.js file loaded');
 $(document).on('turbolinks:load', function(){
   // initial ajax call
   function getAllUsers() {

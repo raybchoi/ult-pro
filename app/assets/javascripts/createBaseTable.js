@@ -121,6 +121,7 @@ $(document).on('turbolinks:load', function(){
         //   title: 'id',
         //   sortable: 'true',
         //   width: '10%',
+        //   class: 'table-header',
         // }
       ],
       data: taskData,
@@ -131,7 +132,12 @@ $(document).on('turbolinks:load', function(){
       classes: "table table-hover table-condensed table-no-bordered",
       sortName: 'dueDate',
       sortOrder: 'desc',
+      rowStyle: $(tableIdFor).on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+        }),
     });
+    // function rowStyle(0);
   };
 
 // end of document.ready

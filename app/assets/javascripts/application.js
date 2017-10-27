@@ -16,19 +16,21 @@
 //= require jquery_ujs
 //= require jquery.atwho
 //= require typeahead.bundle.min
-//= require_tree .
 //= require bootstrap-sprockets
 //= require bootstrap-table
 //= require bootstrap-datepicker
 //= require bootstrap-notify
-//= require bootstrap-select.min.js
+//= require bootstrap-select.min
 //= require flipclock
 //= require moment
+//= require bootstrap-editable
+//= require_tree .
 /**
  * Initialize tagsinput behaviour on inputs and selects which have
  * data-role=tagsinput
  */
  $(document).on('turbolinks:load', function(){
+
   // $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
 
 
