@@ -5,6 +5,46 @@ th {
   background-color: #B6D3AB;
 }
 
-.fixed-table-pagination {
-  background-color: #B6D3AB;
+// .fixed-table-pagination {
+//   background-color: #B6D3AB;
+// }
+
+// FOR TASKSS]\\
+.div-task-assignee {
+  border-style: solid;
+  border-color: black;
+}
+.section-tasks {
+  position: relative;
+  margin-top: 4.5%;
+  // background: image-url('notebook-page.jpg');
+  /* Full width */
+  // width: 100%;
+  /* Center and scale the image nicely */
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // text-align: center;
+}
+.h2-task-header {
+  // this guy is stuck to that guy (using position absolute)
+  position: absolute;
+  display: inline;
+  background: white;
+  z-index: 2;
+  margin-left: 5%;
+  margin-top: -2%;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.div-tasks {
+  border-radius: 8px;
+  border: solid;
+  border-width: 1px;
+  padding: 3.5% 1.5%;
+  // margin-top: -2.7%;
+}
+
+.disable-div {
+  background-color: pink
 }

@@ -19,16 +19,19 @@
 
   <body>
 
-    <nav class="navbar navbar-light navbar-static-top" style="background-color: #FEFFC3; margin-bottom: 0%;">
+    <!-- <nav class="navbar navbar-expand-lg navbar-static-top" style="background-color: blue;">
       <div class="container">
         <div class="navbar-header">
           <%= link_to 'Ult Pro', root_path, class: 'navbar-brand' %>
         </div>
-        <div id="navbar">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar"> -->
           <!-- <ul class="nav navbar-nav">
             <li><%= link_to 'Home', root_path %></li>
           </ul> -->
-          <ul class="nav navbar-nav pull-right">
+          <!-- <ul class="nav navbar-nav pull-right">
             <% if user_signed_in? %>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -47,7 +50,38 @@
           </ul>
         </div>
       </div>
+    </nav> -->
+
+
+
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container nav-bar-container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Ult Pro</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <% if user_signed_in? %>
+                  <li><%= link_to current_user.first_name, edit_user_registration_path, :class => 'nav-bar-user-info'%></li>
+                  <li><%= link_to 'Log out', destroy_user_session_path, method: :delete, :class => 'nav-bar-user-info' %></li>
+              <% else %>
+              <li><%= link_to 'Log In', new_user_session_path, :class => 'nav-bar-user-info' %></li>
+              <li><%= link_to 'Sign Up', new_user_registration_path, :class => 'nav-bar-user-info' %></li>
+              <% end %>
+            </ul>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
     </nav>
+
 
 
 

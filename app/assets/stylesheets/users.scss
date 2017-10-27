@@ -2,44 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// FOR TASKSS]\\
-.div-task {
-  border-style: solid;
-  border-color: black;
-}
-.section-tasks {
-  position: relative;
-  margin-top: 4.5%;
-  // background: image-url('notebook-page.jpg');
-  /* Full width */
-  // width: 100%;
-  /* Center and scale the image nicely */
-  // background-position: center;
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // text-align: center;
-}
-.h2-task-header {
-  // this guy is stuck to that guy (using position absolute)
-  position: absolute;
-  display: inline;
-  background: white;
-  z-index: 2;
-  margin-left: 5%;
-  margin-top: -2%;
-  padding-left: 2%;
-  padding-right: 2%;
-}
-.div-tasks {
-  border: solid;
-  border-width: 2px;
-  padding: 3.5% 1.5%;
-  // margin-top: -2.7%;
-}
 
-.disable-div {
-  background-color: pink
-}
 
 // for date and time - for the clock made updates to the CSS file
 .div-date-time-user-info{
@@ -57,6 +20,7 @@
 .section-date-time-user-info {
   padding-bottom: 10%;
   color: #E8E8E8;
+  margin-top:-51px;
 }
 
 .date {

@@ -21,5 +21,24 @@
 
 body{
   font-family: 'Khula', sans-serif;
+}
 
+.navbar {
+  background: transparent;
+  margin-bottom: 0%;
+  border: 0;
+  box-shadow: none;
+  font-size: 150%;
+
+}
+
+.navbar.navbar-default .navbar-collapse {
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+a.navbar-brand, a.nav-bar-user-info {
+  color: #E8E8E8 !important;
+  font-size: 125%
 }
