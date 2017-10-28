@@ -24,12 +24,15 @@
 //= require flipclock
 //= require moment
 //= require bootstrap-editable
+//= require bootstrap-table-editable
+//= require combodate
 //= require_tree .
 /**
  * Initialize tagsinput behaviour on inputs and selects which have
  * data-role=tagsinput
  */
  $(document).on('turbolinks:load', function(){
+   $.fn.editable.defaults.mode = 'inline';
 
   // $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
 

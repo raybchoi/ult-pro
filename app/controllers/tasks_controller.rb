@@ -24,6 +24,25 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    # if user_check
+      @task = Task.find_by_id(params[:id])
+      if @task.update(task_params)
+        respond_to do |format|  ## Add this
+          format.json { render json: @task, status: :ok}
+        end                    ## Add this
+      else
+        respond_to do |format|  ## Add this
+          format.json { render json: @task.errors, status: :unprocessable_entity }
+        end                    ## Add this
+        flash[:error] = "Cannot updateStatus"
+      end
+    # else
+      # flash[:error] = "Cannot edit other pets"
+      # redirect_back(fallback_location: root_path)
+    # end
+  end
+
 
   private
 
@@ -31,5 +50,16 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :description, :assignee_id, :owner_id, :due_date, :meeting_id, :status)
   end
 
+  def update_task
+    params.require(:task).permit(:status)
+  end
+  # def user_check
+  #   @task = Task.find_by_id(params[:id])
+  #   if current_user.id.to_s == @pet.user_id.to_s
+  #     true
+  #   else
+  #     false
+  #   end
+  # end
 
 end
