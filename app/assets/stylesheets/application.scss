@@ -11,14 +11,12 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
- *= require animate
 
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap-table';
  @import 'bootstrap-datepicker3';
-
 body{
   font-family: 'Khula', sans-serif;
 }

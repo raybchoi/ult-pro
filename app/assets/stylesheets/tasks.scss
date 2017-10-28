@@ -23,6 +23,17 @@
   // background-size: cover;
   // text-align: center;
 }
+.show-task-section {
+  position: relative;
+  // background: image-url('notebook-page.jpg');
+  /* Full width */
+  // width: 100%;
+  /* Center and scale the image nicely */
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // text-align: center;
+}
 .h2-task-header {
   // this guy is stuck to that guy (using position absolute)
   position: absolute;
@@ -34,6 +45,7 @@
   padding-left: 2%;
   padding-right: 2%;
 }
+
 .div-tasks {
   border-radius: 8px;
   border: solid;
@@ -45,7 +57,24 @@
 .disable-div {
   background-color: pink
 }
+.h2-single-task-header {
+  font-size: 400%;
+  position: relative;
+  top: 40px;
+  background: white;
+  display: inline-block;
+  left: 5%;
+}
 
+.fake-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.single-task {
+  font-weight: bold;
+}
 // a.editable-click {
 //   color: green;
 //   border-color: green;

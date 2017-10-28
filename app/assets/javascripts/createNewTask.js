@@ -115,7 +115,7 @@ $(document).on('turbolinks:load', function(){
           description: $('#task-description').val(),
           assignee_id: $("#span-assigned-to").attr('data-user-id'),
           owner_id: `${document.cookie.split('id=')[1]}`,
-          status: 'Open',
+          status: 'open',
           due_date: new Date($('#create-task-date-picker').val()).getTime(),
         },
       };
@@ -132,7 +132,7 @@ $(document).on('turbolinks:load', function(){
             index: 0,
             row: {
               status: newlyCreatedTaskData.status,
-              title: newlyCreatedTaskData.title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${newlyCreatedTaskData.id}`),
+              title:`<span class='task-title fake-link'> ${newlyCreatedTaskData.title.slice(0,120).concat('...')}</span>`,
               description: newlyCreatedTaskData.description.slice(0,240).concat('...'),
               taskResponsibleOwner: `${newlyCreatedTaskData.assignee_info.first_name} ${newlyCreatedTaskData.assignee_info.last_name}`,
               createdDate:  moment(newlyCreatedTaskData.created_date).format("MM/DD/YY"),

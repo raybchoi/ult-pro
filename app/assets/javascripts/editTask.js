@@ -15,22 +15,40 @@ $(document).on('turbolinks:load', function(){
     console.log('this is event ', event)
     let oldStatus = old
     console.log('this is oldStatus ', oldStatus)
-    let updateTaskStatusData = { task:
-      {
-        status: `${row.status}`,
-      },
-    };
-    // $(event.target.children[1].childNodes[0].children[0].children[0]).removeAttr("data-value");
-    // $(event.target.children[1].childNodes[0].children[0].children[0]).attr("data-value", "blocked");
-    // event.target.children[1].childNodes[0].children[0].children[0].textContent='Blocked';
-    // console.log('THIS IS IT', event.target.children[1].childNodes[0].children[0].children[0].innerText)
-      // console.log('THIS IS IT', event.target.children[1].childNodes[0].children[0].children[0])
+    let updateTaskStatusData;
+    if ( `${row.status}` === 'complete' ) {
+      updateTaskStatusData = { task:
+        {
+          status: `${row.status}`,
+          completed_date: new Date().getTime(),
+        }
+      };
+    } else {
+      updateTaskStatusData = { task:
+        {
+          status: `${row.status}`,
+        }
+      };
+    }
     $.ajax({
     method: 'PUT',
     url: `/tasks/${row.id}`,
     data: updateTaskStatusData,
     success: function(res) {
-      console.log('DATA returned from editedProfileHeaderData', res);
+      console.log('DATA returned from updateTaskStatusData', res);
+      $.notify({
+        title: '<strong>Yay!</strong>',
+        message: 'Status was updated.'
+      },{
+        type: 'success',
+        timer: 1000,
+        placement: {
+          from: "top",
+          align: "right"
+        },
+        delay: 5000,
+        timer: 1000,
+      });
     },
     error: function(err) {
       $.notify({
@@ -51,5 +69,10 @@ $(document).on('turbolinks:load', function(){
   });
 
 
+      // $(event.target.children[1].childNodes[0].children[0].children[0]).removeAttr("data-value");
+      // $(event.target.children[1].childNodes[0].children[0].children[0]).attr("data-value", "blocked");
+      // event.target.children[1].childNodes[0].children[0].children[0].textContent='Blocked';
+      // console.log('THIS IS IT', event.target.children[1].childNodes[0].children[0].children[0].innerText)
+        // console.log('THIS IS IT', event.target.children[1].childNodes[0].children[0].children[0])
 
 });

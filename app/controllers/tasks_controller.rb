@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    # if user_check
+    if user_check
       @task = Task.find_by_id(params[:id])
       if @task.update(task_params)
         respond_to do |format|  ## Add this
@@ -34,32 +34,28 @@ class TasksController < ApplicationController
       else
         respond_to do |format|  ## Add this
           format.json { render json: @task.errors, status: :unprocessable_entity }
-        end                    ## Add this
-        flash[:error] = "Cannot updateStatus"
+        end
       end
-    # else
-      # flash[:error] = "Cannot edit other pets"
-      # redirect_back(fallback_location: root_path)
-    # end
+    else
+    flash[:error] = "Cannot Update Status"
+    end
   end
-
-
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :assignee_id, :owner_id, :due_date, :meeting_id, :status)
+    params.require(:task).permit(:title, :description, :assignee_id, :owner_id, :due_date, :meeting_id, :status, :completed_date)
   end
 
   def update_task
     params.require(:task).permit(:status)
   end
-  # def user_check
-  #   @task = Task.find_by_id(params[:id])
-  #   if current_user.id.to_s == @pet.user_id.to_s
-  #     true
-  #   else
-  #     false
-  #   end
-  # end
+  def user_check
+    @task = Task.find_by_id(params[:id])
+    if current_user.id.to_s == @task.assignee_id.to_s || current_user.id.to_s == @task.owner.id.to_s
+      true
+    else
+      false
+    end
+  end
 
 end

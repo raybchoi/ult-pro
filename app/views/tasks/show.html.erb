@@ -1,9 +1,38 @@
-<div>
-  <h4> User Info </h4>
-  <div>
-      <p>Title: <%= @task.title %></p>
-      <p>Task ID: <%= @task.id %></p>
+
+
+
+
+<section class='show-task-section'>
+  <h2 class='h2-single-task-header'>Tasks Details</h2>
+  <div class='tasks_assigned_to_me_div div-tasks'>
+
+    <div class="row">
+      <% if @task.status == 'open' %>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <span class='open status single-task'>Status: Open</span>
+      </div>
+     <%= render partial: "task_date" %>
+
+      <% elsif @task.status == 'inprogress' %>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <span class='inprogress status single-task'>Status: Inprogress</span>
+      </div>
+        <%= render partial: "task_date" %>
+
+      <% elsif @task.status == 'blocked' %>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <span class='blocked status single-task'>Status: Blocked</span>
+      </div>
+        <%= render partial: "task_date" %>
+
+      <% else %>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <span class='closed status single-task'>Status: Closed</span>
+      </div>
+      <% end %>
+
+    </div>
+    <h2 class='task-title'><%= @task.title %></h2>
+    <h4 class='task-description'><%= @task.description %></h4>
   </div>
-
-
-</div>
+</section>

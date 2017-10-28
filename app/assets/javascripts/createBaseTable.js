@@ -27,7 +27,7 @@ $(document).on('turbolinks:load', function(){
         tasksCreatedForMyself.push(
           {
             status: resOwnedTasks[i].status,
-            title: resOwnedTasks[i].title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${resOwnedTasks[i].id}`),
+            title:`<span class='task-title fake-link'> ${resOwnedTasks[i].title.slice(0,120).concat('...')}</span>`,
             description: resOwnedTasks[i].description.slice(0,100).concat('...'),
             taskResponsibleOwner: `${resOwnedTasks[i].owner_info.first_name} ${resOwnedTasks[i].owner_info.last_name}`,
             taskResponsibleId: `${resOwnedTasks[i].owner_info.id}`,
@@ -43,7 +43,7 @@ $(document).on('turbolinks:load', function(){
         tasksOtherOweMe.push(
           {
             status: resOwnedTasks[i].status,
-            title: resOwnedTasks[i].title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${resOwnedTasks[i].id}`),
+            title: `<span class='task-title fake-link'> ${resOwnedTasks[i].title.slice(0,120).concat('...')} </span>`,
             description: resOwnedTasks[i].description.slice(0,100).concat('...'),
             taskResponsibleOwner: `${resOwnedTasks[i].assignee_info.first_name} ${resOwnedTasks[i].assignee_info.last_name}`,
             taskResponsibleId: `${resOwnedTasks[i].assignee_info.id}`,
@@ -62,7 +62,7 @@ $(document).on('turbolinks:load', function(){
     ) {
       tasksAssignedToMe.push({
         status: resAssignedTasks[i].status,
-        title: resAssignedTasks[i].title.slice(0,120).concat('...').link(`http://localhost:3000/tasks/${resAssignedTasks[i].id}`),
+        title:`<span class='task-title fake-link'> ${resAssignedTasks[i].title.slice(0,120).concat('...')}</span>`,
         description: resAssignedTasks[i].description.slice(0,100).concat('...'),
         taskResponsibleOwner: `${resAssignedTasks[i].owner_info.first_name} ${resAssignedTasks[i].owner_info.last_name}`,
         taskResponsibleId: `${resAssignedTasks[i].owner_info.id}`,
@@ -101,7 +101,7 @@ $(document).on('turbolinks:load', function(){
                    type: 'select',
                    source: [
                        {value: 'open', text: 'Open'},
-                       {value: 'inprogress', text: 'Inprogress'},
+                       {value: 'inprogress', text: 'In Progress'},
                        {value: 'blocked', text: 'Blocked'},
                        {value: 'complete', text: 'Complete'}
                    ],
