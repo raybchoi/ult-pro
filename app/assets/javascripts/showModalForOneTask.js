@@ -5,13 +5,14 @@ $(document).on('turbolinks:load', function(){
   $('.div-tasks').on('click-cell.bs.table', function (event, field, old, row) {
     // console.log('click-cell.bs.table file loaded ', field)
     // console.log('click-cell.bs.table file loaded ', row.id);
-    $('.show-modal').remove();
+
     if ( field === 'title' ) {
       $.ajax({
         method: 'GET',
         url: `http://localhost:3000/tasks/${row.id}.json`,
         success: function(res) {
-          console.log('DATA returned from updateTaskStatusData', res);
+          $('.show-modal').remove();
+          console.log('DATA returned from showModalForOneTask', res);
           let taskHtml;
 
           function createTaskHtmlModal (jsonResponse, status) {
@@ -96,9 +97,12 @@ $(document).on('turbolinks:load', function(){
             </div>
             `
           }
-          $('.show-modal-outter-div').append(taskHtml);
+          $('.show-modal-outer-div').append(taskHtml);
           $('#showOneTask').modal('show');
+          // $('#tasks_assigned_to_me').bootstrapTable('refresh');
         },
+
+        
       })
       }
     });

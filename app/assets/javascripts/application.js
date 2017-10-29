@@ -26,7 +26,9 @@
 //= require bootstrap-editable
 //= require bootstrap-table-editable
 //= require combodate
+//= require bootstrap-drawer
 //= require_tree .
+
 /**
  * Initialize tagsinput behaviour on inputs and selects which have
  * data-role=tagsinput

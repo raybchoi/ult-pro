@@ -11,7 +11,7 @@
         </select>
 
         <label for="task-assignee_id">assignee_id</label>
-        <div id='div-task-assignee' class="div-assign-task" contenteditable="true" autocomplete="off" required></div>
+        <div id='div-id-task-assignee' class="div-class-assign-task" contenteditable="true" autocomplete="off" required></div>
 
         <label for="task-title">Title</label>
         <input type='text' id='task-title' autocomplete="off" maxlength=120 required/>
@@ -50,7 +50,111 @@
 
 </div>
 
-<div class='show-modal-outter-div'>
+<!-- Modal for ONE item -->
+<div class='show-modal-outer-div'>
   <div class='show-modal'></div>
 </div>
+
+
+
+
+
+<!-- drawer for editing -->
+
+<div class='edit-drawer-outer-div'>
+  <div class='edit-drawer'></div>
+</div>
+
+<!--
+<div id="drawer-edit-task" class="drawer drawer-right dw-xs-10 dw-sm-6 dw-md-4 fold " aria-labelledby="drawerEditTask">
+  <div class="drawer-controls">
+    <a href="#drawer-edit-task" data-toggle="drawer" aria-foldedopen="false" aria-controls="drawerEditTask" class="btn btn-primary btn-sm">Menu</a>
+  </div>
+  <div class="drawer-contents">
+    <div class="drawer-heading">
+      <h2 class="drawer-title">Menu</h2>
+    </div>
+    <div class="drawer-body">
+      <p>
+        This is a properly padded container for content in the
+        drawer that isn't a navigation.
+      </p>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+<!-- MODAL TO EDIT ONE ITEM -->
+<div class='edit-modal-outer-div'>
+  <div class='edit-modal'></div>
+  <div class="modal right fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="editModal">Right Sidebar</h4>
+        </div>
+
+        <div class="modal-body">
+          <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </p>
+        </div>
+
+      </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+  </div><!-- modal -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- SIDE MODAL -->
+<div class="container demo">
+  <div class='edit-modal'></div>
+
+  <div class="text-center">
+    <button type="button" class="btn btn-demo" data-toggle="modal" data-target="#myModal">
+      Left Sidebar Modal
+    </button>
+
+    <button type="button" class="btn btn-demo" data-toggle="modal" data-target="#editModal">
+      Right Sidebar Modal
+    </button>
+  </div>
+
+
+</div><!-- container -->
+
 <!-- Modal -->
+
+
+<div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Left Sidebar</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </p>
+      </div>
+
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->

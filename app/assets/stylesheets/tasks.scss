@@ -1,13 +1,15 @@
 // Place all the styles related to the Tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.sortable {
-  background-color: #B6D3AB;
-}
+
+// background color for the header
+// .sortable {
+//   background-color: #B6D3AB;
+// }
 
 
 // FOR TASKSS]\\
-.div-assign-task {
+.div-class-assign-task {
   border-style: solid;
   border-color: black;
 }
@@ -72,8 +74,15 @@
     cursor: pointer;
 }
 
+.fake-span {
+    cursor: pointer;
+}
 .single-task {
   font-weight: bold;
+}
+
+.datepicker {
+  z-index: 2000 !important;
 }
 // a.editable-click {
 //   color: green;

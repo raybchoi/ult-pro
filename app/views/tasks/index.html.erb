@@ -1,1 +1,27 @@
 
+
+<section class='section-edit-task'>
+  <div class="edit-task">
+    <form id='form-edit-new-task' name='form-edit-new-task'>
+      <label for="task-type">Who is this for?</label>
+
+      <select class='selectpicker' name="taskTypeList" id="task-type">
+        <option value="#tasks_others_owe_me" id='table-type-for-task' class='tasks_others_owe_me'>Someone Else</option>
+        <option value="#my_own_tasks" id='table-type-for-task' class='my_own_tasks'>Me</option>
+      </select>
+
+      <label for="task-assignee_id">assignee_id</label>
+      <div id='div-task-assignee' class="div-assign-task" contenteditable="true" autocomplete="off" required></div>
+
+      <label for="task-title">Title</label>
+      <input type='text' id='task-title' autocomplete="off" maxlength=120 required/>
+
+      <label for="task-description">Description</label>
+      <input type='text' id='task-description' maxlength=200 autocomplete="off"  required/>
+
+      <label for="edit-task-date-picker">When is this due?</label>
+      <input type='text' id="create-task-date-picker" autocomplete="off"  placeholder='mm/dd/yyyy' required>
+      <button type='submit' class='btn edit-task-button'>Create New Task</button>
+    </form>
+  </div>
+</section>
