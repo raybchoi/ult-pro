@@ -1,7 +1,5 @@
 console.log('createNewTask.js file loaded');
 $(document).on('turbolinks:load', function(){
-
-
   // initial ajax call
   let jsonResponseFromGetAllUsers;
   function getAllUsers() {
@@ -53,7 +51,6 @@ $(document).on('turbolinks:load', function(){
           return false;
         }
       } else {
-        console.log('hello');
         $.notify({
           title: '<strong>Heads up!</strong>',
           message: 'You can only add one person to a task.'
@@ -132,6 +129,24 @@ $(document).on('turbolinks:load', function(){
       return
     }
 
+    function addNewTaskToTable (newlyCreatedTaskData, tableTypeToAppend, tableNameWithinTheTable) {
+      $(tableTypeToAppend).bootstrapTable('insertRow', {
+        index: 0,
+        row: {
+          status: newlyCreatedTaskData.status,
+          title:`<span class='task-title fake-link'> ${newlyCreatedTaskData.title.slice(0,120).concat('...')}</span>`,
+          description: newlyCreatedTaskData.description.slice(0,240).concat('...'),
+          taskResponsibleOwner: `${newlyCreatedTaskData.assignee_info.first_name} ${newlyCreatedTaskData.assignee_info.last_name}`,
+          createdDate:  moment(newlyCreatedTaskData.created_date).format("MM/DD/YY"),
+          dueDate: moment(newlyCreatedTaskData.due_date).format("MM/DD/YY"),
+          id: newlyCreatedTaskData.id,
+          editTask: `<span class="glyphicon glyphicon-pencil fake-span"></span>`,
+          deleteTask: `<span class="glyphicon glyphicon-trash fake-span"></span>`,
+          tableName: tableNameWithinTheTable,
+        }
+      });
+    };
+
     // console.log('EPIOCH TIME,', moment.unix(1508828400).format("MM/DD/YY"));)
     $('#form-create-new-task').on('submit', function() {
       event.preventDefault();
@@ -141,7 +156,7 @@ $(document).on('turbolinks:load', function(){
         return;
       };
       let getSelectDropDownId = document.getElementById("task-type")
-      let tableType = getSelectDropDownId.options[getSelectDropDownId.selectedIndex].value;
+      let tableTypeToAppend = getSelectDropDownId.options[getSelectDropDownId.selectedIndex].value;
       let newTaskInfo = { task:
         {
           title: $('#task-title').val(),
@@ -155,23 +170,7 @@ $(document).on('turbolinks:load', function(){
 
 
       // console.log(newTaskInfo);
-      function addNewTaskToTable (newlyCreatedTaskData, tableName) {
-        $(tableType).bootstrapTable('insertRow', {
-          index: 0,
-          row: {
-            status: newlyCreatedTaskData.status,
-            title:`<span class='task-title fake-link'> ${newlyCreatedTaskData.title.slice(0,120).concat('...')}</span>`,
-            description: newlyCreatedTaskData.description.slice(0,240).concat('...'),
-            taskResponsibleOwner: `${newlyCreatedTaskData.assignee_info.first_name} ${newlyCreatedTaskData.assignee_info.last_name}`,
-            createdDate:  moment(newlyCreatedTaskData.created_date).format("MM/DD/YY"),
-            dueDate: moment(newlyCreatedTaskData.due_date).format("MM/DD/YY"),
-            id: newlyCreatedTaskData.id,
-            editTask: `<span class="glyphicon glyphicon-pencil fake-span"></span>`,
-            deleteTask: `<span class="glyphicon glyphicon-trash fake-span"></span>`,
-            tableName: tableName,
-          }
-        });
-      };
+
 
       $.ajax({
         method: 'POST',
@@ -179,11 +178,11 @@ $(document).on('turbolinks:load', function(){
         data: newTaskInfo,
         success: function(newlyCreatedTaskData) {
           // console.log('DATA returned from createNewTask', newlyCreatedTaskData);
-          // console.log('THIS IS THE TABLE TYPE', tableType);
+          // console.log('THIS IS THE TABLE TYPE', tableTypeToAppend);
           if ( $("#span-assigned-to").attr('data-user-id') === `${document.cookie.split('id=')[1]}` ) {
-            addNewTaskToTable (newlyCreatedTaskData, `tasksCreatedForMyself`)
+            addNewTaskToTable (newlyCreatedTaskData, tableTypeToAppend, `tasksCreatedForMyself`)
           } else {
-            addNewTaskToTable (newlyCreatedTaskData, `tasksOtherOweMe`)
+            addNewTaskToTable (newlyCreatedTaskData, tableTypeToAppend, `tasksOtherOweMe`)
           };
           $("#task-type").val('default');
           $("#task-type").selectpicker("refresh");
@@ -199,7 +198,7 @@ $(document).on('turbolinks:load', function(){
       // #form-create-new-task
     });
 
-    // $(tableType).bootstrapTable('insertRow', {
+    // $(tableTypeToAppend).bootstrapTable('insertRow', {
     //   index: 0,
     //   row: {
     //     status: newlyCreatedTaskData.status,
@@ -216,9 +215,9 @@ $(document).on('turbolinks:load', function(){
 
 
     $('.div-tasks').on('click-cell.bs.table', function (event, field, old, row) {
-      console.log('on edit this is the field - ', field);
-      console.log('on edit this is the event - ', event);
-      console.log('on edit this is the row - ', row);
+      console.log('on edit cell this is the field - ', field);
+      console.log('on edit cell this is the event - ', event);
+      console.log('on edit cell this is the row - ', row);
       let editTaskHtml;
       let selectPickerHtml;
       let assignedIndividualTypeAheadHtml;
@@ -227,11 +226,8 @@ $(document).on('turbolinks:load', function(){
         editTaskHtml =
         `
         <div class='edit-drawer'>
-        <div id="drawer-edit-task" class="drawer drawer-right dw-xs-10 dw-sm-6 dw-md-6 fold " aria-labelledby="drawerEditTask">
-        <div class="drawer-controls">
-        <a href="#drawer-edit-task" data-toggle="drawer" aria-foldedopen="false" aria-controls="drawerEditTask" class="btn btn-primary btn-sm">Menu</a>
-        </div>
-        <div class="drawer-contents">
+        <div id="drawer-edit-task" class="drawer drawer-left dw-xs-10 dw-sm-6 dw-md-6 fold " aria-labelledby="drawerEditTask">
+
         <div class="drawer-heading">
         <h2 class="drawer-title">Update Task</h2>
         </div>
@@ -263,12 +259,12 @@ $(document).on('turbolinks:load', function(){
         <input type='text' id="due-date-task-date-picker" autocomplete="off"  value='${moment(res.due_date).format('MM/DD/YY')}' required>
 
 
-        <button type='submit' class='btn update-task-button'>Update New Task</button>
+        <button type='submit' class='btn update-task-button'>Update Task</button>
 
 
         <div class='select-picker-goes-here'></div>
         </form>
-
+        <a href="#drawer-edit-task" data-toggle="drawer" aria-controls="drawerEditTask" class="btn btn-primary btn-sm">Close</a>
         </div>
         </section>
 
@@ -280,7 +276,7 @@ $(document).on('turbolinks:load', function(){
       };
 
       function insertStatusSelectPickerDrawer (res) {
-        console.log('insertStatusSelectPickerDrawer ', res);
+        // console.log('insertStatusSelectPickerDrawer ', res);
         if ( res.status === 'open' ) {
           selectPickerHtml =
           `
@@ -351,18 +347,19 @@ $(document).on('turbolinks:load', function(){
 
       }
 
-      if ( field === 'editTask' && row.tableName === "tasksAssignedToMe" ) {
+      function showEditAndUpdateSingleTask (row, tableName) {
+        console.log('showEditAndUpdateSingleTask - ROW INFO', row );
+        console.log('showEditAndUpdateSingleTask - tableName INFO', tableName );
         $.ajax({
           method: 'GET',
           url: `http://localhost:3000/tasks/${row.id}.json`,
           success: function(res) {
+
             $('.edit-drawer').remove();
             console.log('DATA returned from editFullTaskTask', res);
-            // create the different html forms
+            // create the different html form
             editTaskHtmlDrawer(res);
-
-            // insertStatusSelectPickerDrawer(res);
-
+            insertStatusSelectPickerDrawer(res);
             // append all the html forms
             $('.edit-drawer-outer-div').append(editTaskHtml);
             $('.select-picker-goes-here').append(selectPickerHtml);
@@ -371,7 +368,7 @@ $(document).on('turbolinks:load', function(){
             reitializeFunctionalityPostAppendHtml(jsonResponseFromGetAllUsers)
             // open drawer
             $('#drawer-edit-task').drawer('toggle');
-
+            // listen for changes to assign ID checkmark
             $('#openAssignIdCheckMarkBox').on('change', function() {
               if (this.checked) {
                 $('.appendUserInputBox').append(`
@@ -385,77 +382,16 @@ $(document).on('turbolinks:load', function(){
               }
             });
 
-            // end of ajax success call
-
-            $('#form-update-task').on('submit', function(event) {
-              event.preventDefault()
-              // console.log('update-task-button ', event);
-              if ($('#span-assigned-to').length === 0) {
-                notificationIfSpanTaskIsNotAssignedToAnyone();
-                return;
-              };
-              // console.log('getting past the first check');
-
-              // get all the values
-              // get title
-              // $('#task-title-drawer').val()
-              // console.log('#task-title-drawer ', $('#task-title-drawer').val());
-              // // get desc
-              // $('#task-description-drawer').val()
-              // console.log('#task-description-drawer ', $('#task-description-drawer').val());
-              // // get Who it is assigned to info
-              // $("#span-assigned-to").attr('data-user-id')
-              // console.log("#span-assigned-to ", $("#span-assigned-to").attr('data-user-id'));
-              // // get editTime
-              let dueDate = $('#due-date-task-date-picker').val()
-              // console.log('#due-date-task-date-picker ', new Date(dueDate).getTime());
-              // // // get completedTime
-              // // let completedDate = $('#completed-task-date-picker').val()
-              // // console.log('#completed-task-date-picker ', new Date(completedDate).getTime());
-              //
-              let status = $('#status-type option:selected').val();
-              // console.log('#task-type option:selected', status);
-
-              let updatedTaskInfo;
-              if ( status !== 'completed' ) {
-                updatedTaskInfo = { task:
-                  {
-                    title: $('#task-title-drawer').val(),
-                    description: $('#task-description-drawer').val(),
-                    status: status,
-                    due_date: new Date(dueDate).getTime(),
-                    assignee_id: $("#span-assigned-to").attr('data-user-id'),
-                    completed_date:'',
-                  },
-                };
-              } else {
-                updatedTaskInfo = { task:
-                  {
-                    title: $('#task-title-drawer').val(),
-                    description: $('#task-description-drawer').val(),
-                    status: status,
-                    due_date: new Date(dueDate).getTime(),
-                    assignee_id: $("#span-assigned-to").attr('data-user-id'),
-                    completed_date: new Date().getTime(),
-                  },
-                };
-              };
-              // ajax to update the task
+            function runAjaxCallToUpdateSingleTask (resFromGettingRowDataAjaxCall, updatedTaskInfo, tableName) {
+              // console.log('runAjaxCallToUpdateSingleTask response - ', resFromGettingRowDataAjaxCall);
+              // console.log('runAjaxCallToUpdateSingleTask updatedTaskInfo - ', updatedTaskInfo);
+              // console.log('runAjaxCallToUpdateSingleTask tableName - ', tableName);
               $.ajax({
                 method: 'PUT',
-                url: `/tasks/${res.id}`,
+                url: `/tasks/${resFromGettingRowDataAjaxCall.id}`,
                 data: updatedTaskInfo,
                 success: function(res) {
-                  console.log('DATA returned from updateTaskStatusData', res);
-                  // if the assignee ID is the same as the cookie id then update the row
-                  // if ( parseInt(`${document.cookie.split('id=')[1]}`) === res.assignee_info.id ) {
-                  //   $('#tasks_assigned_to_me').bootstrapTable('updateRow' , function() {
-                  //
-                  //   })
-                  //
-                  // } )
-
-                  // if it is not then remove it from the row
+                  console.log('DATA returned from runAjaxCallToUpdateSingleTask', res);
                   $.notify({
                     title: '<strong>Yay!</strong>',
                     message: 'Status was updated.'
@@ -469,23 +405,74 @@ $(document).on('turbolinks:load', function(){
                     delay: 5000,
                     timer: 1000,
                   });
-                  // renderAllTaskFirstTime();
-                  // remove the table and then reload
+                  // if the assignee ID is the same as the cookie id then update the row
+                  console.log('resFromAjax response - ', res);
 
-                  // $.when(renderAllTaskFirstTime(), $('#tasks_assigned_to_me').bootstrapTable('load'))
-                  console.log('this is the res id', res);
+                  function updateTableWhereAssigneeNameDoesNotChange (resFromAjaxCallToGetTaskInfo, nameOfTableToUpdate) {
+                    $(nameOfTableToUpdate).bootstrapTable('updateByUniqueId', {
+                      id: resFromAjaxCallToGetTaskInfo.id,
+                      row: {
+                        status: resFromAjaxCallToGetTaskInfo.status,
+                        title: `<span class='task-title fake-link'> ${resFromAjaxCallToGetTaskInfo.title.slice(0,120).concat('...')}</span>`,
+                        description : resFromAjaxCallToGetTaskInfo.description,
+                        dueDate: moment(resFromAjaxCallToGetTaskInfo.due_date).format("MM/DD/YY"),
+                      }
+                    });
+                  };
 
+                  function updateTableAddAssigneeName (resFromAjaxCallToGetTaskInfo, nameOfTableToUpdate) {
+                    $(nameOfTableToUpdate).bootstrapTable('updateByUniqueId', {
+                      id: resFromAjaxCallToGetTaskInfo.id,
+                      row: {
+                        status: resFromAjaxCallToGetTaskInfo.status,
+                        title: `<span class='task-title fake-link'> ${resFromAjaxCallToGetTaskInfo.title.slice(0,120).concat('...')}</span>`,
+                        description : resFromAjaxCallToGetTaskInfo.description,
+                        dueDate: moment(resFromAjaxCallToGetTaskInfo.due_date).format("MM/DD/YY"),
+                      }
+                    });
+                  };
 
-                  $('#tasks_assigned_to_me').bootstrapTable('updateByUniqueId', {
-                    id: res.id,
-                    row: {
-                      status: res.status,
-                      title: res.title,
-                      description : res.description,
-                      createdDate: moment(res.created_date).format("MM/DD/YY"),
-                      dueDate: moment(res.due_date).format("MM/DD/YY"),
+                  if ( tableName === '#tasks_assigned_to_me' ) {
+                    if ( parseInt(`${document.cookie.split('id=')[1]}`) === res.assignee_info.id ) {
+                      console.log('THIS IS TABLE NAME if table = #tasks_assigned_to_me - ', tableName);
+                      console.log('THIS IS RES.id if table = #tasks_assigned_to_me - ', res.id);
+                      updateTableWhereAssigneeNameDoesNotChange(res, tableName)
+                    } else {
+                      console.log('THIS IS TABLE NAME IF NOT MINE if table = #tasks_assigned_to_me - ', tableName);
+                      console.log('THIS IS res NAME IF NOT MINE if table = #tasks_assigned_to_me - ', res);
+                      console.log('THIS IS RES.id IF NOT MINE if table = #tasks_assigned_to_me - ', res.id);
+                      $(tableName).bootstrapTable('removeByUniqueId', res.id)
+                    };
+                  } else if ( tableName === '#tasks_others_owe_me' ) {
+                    console.log('#tasks_others_owe_me - ', res);
+                    if ( ( parseInt(`${document.cookie.split('id=')[1]}`) === res.owner_info.id ) && ( parseInt(`${document.cookie.split('id=')[1]}`) === res.assignee_info.id ) ) {
+                      console.log(' THIS IS RES if table = #tasks_others_owe_me IF cookie all matches - ', res);
+                      $(tableName).bootstrapTable('removeByUniqueId', res.id)
+                      addNewTaskToTable(res, '#my_own_tasks', 'tasksCreatedForMyself')
+                    } else {
+                      $(tableName).bootstrapTable('updateByUniqueId', {
+                        id: res.id,
+                        row: {
+                          status: res.status,
+                          title: `<span class='task-title fake-link'> ${res.title.slice(0,120).concat('...')}</span>`,
+                          taskResponsibleOwner: `${res.assignee_info.first_name} ${res.assignee_info.last_name}`,
+                          description : res.description,
+                          dueDate: moment(res.due_date).format("MM/DD/YY"),
+                        }
+                    });
+                  }
+                } else if ( tableName === '#my_own_tasks' ) {
+                    if ( ( parseInt(`${document.cookie.split('id=')[1]}`) === res.owner_info.id ) && ( parseInt(`${document.cookie.split('id=')[1]}`) === res.assignee_info.id ) ) {
+                      updateTableWhereAssigneeNameDoesNotChange(res, tableName)
+                    } else {
+                      // means i still own the task by I assinged it to someone else
+                      $(tableName).bootstrapTable('removeByUniqueId', res.id);
+                      addNewTaskToTable(res, '#tasks_others_owe_me', 'tasksOtherOweMe');
                     }
-                  });
+                }
+                  // close the drawer
+                  $('#drawer-edit-task').drawer('toggle');
+                  // end of ajax sucess call
                 },
                 error: function(err) {
                   $.notify({
@@ -503,25 +490,77 @@ $(document).on('turbolinks:load', function(){
                   });
                 }
               });
+              // end of function runAjaxCallToUpdateSingleTask
+            };
+
+            // updating the form
+            $('#form-update-task').on('submit', function(event) {
+              event.preventDefault()
+              let dueDate = $('#due-date-task-date-picker').val();
+              let status = $('#status-type option:selected').val();
+              let updatedTaskInfo;
+
+              function statusCheck (status) {
+                if ( status !== 'completed' ) {
+                  return ''
+                } else {
+                  return new Date().getTime()
+                }
+              }
+
+              if ( document.getElementById('openAssignIdCheckMarkBox').checked ) {
+                if ($('#span-assigned-to').length === 0) {
+                  notificationIfSpanTaskIsNotAssignedToAnyone();
+                  return;
+                };
+                updatedTaskInfo = { task:
+                  {
+                    title: $('#task-title-drawer').val(),
+                    description: $('#task-description-drawer').val(),
+                    status: status,
+                    due_date: new Date(dueDate).getTime(),
+                    assignee_id: $("#span-assigned-to").attr('data-user-id'),
+                    completed_date: statusCheck(status),
+                }
+              }
+            }
+            else {
+                updatedTaskInfo = { task:
+                  {
+                    title: $('#task-title-drawer').val(),
+                    description: $('#task-description-drawer').val(),
+                    status: status,
+                    due_date: new Date(dueDate).getTime(),
+                    completed_date: statusCheck(status),
+                }
+              }
+            }
+              runAjaxCallToUpdateSingleTask(res, updatedTaskInfo, tableName);
               // end of submit form for updating task
-            })
+            });
             // end of first ajax sucess call
           }
           // end of first ajax call
         });
-        // field === 'editTask' && row.tableName === "tasksAssignedToMe"
+        // end of function showEditAndUpdateSingleTask
       }
-      // end of  edit task after clicking on the edit task icon
+
+      if ( field === 'editTask' && row.tableName === 'tasksAssignedToMe' ) {
+        console.log('EDIT TASK THAT IS ASSIGNED TO ME -')
+        showEditAndUpdateSingleTask(row, '#tasks_assigned_to_me');
+        console.log('EDIT TASK THAT IS ASSIGNED TO ME -', row);
+
+      } else if ( field === 'editTask' && row.tableName === 'tasksOtherOweMe' ) {
+        console.log('EDIT TASK OTHERS OWE ME');
+        showEditAndUpdateSingleTask(row, '#tasks_others_owe_me');
+        console.log('EDIT TASK OTHERS OWE ME - ', row);
+      } else if ( field === 'editTask' && row.tableName === 'tasksCreatedForMyself' ) {
+        console.log('EDIT TASK CREATED FOR MYSELF');
+        showEditAndUpdateSingleTask(row, '#my_own_tasks');
+        console.log('EDIT TASK CREATED FOR MYSELF - ', row);
+      }
+
     });
-
-    // createTasksTable(tasksAssignedToMe, '#tasks_assigned_to_me', 'Assigned By')
-    // createTasksTable(tasksOtherOweMe, '#tasks_others_owe_me', 'Assigned To')
-    // createTasksTable(tasksCreatedForMyself, '#my_own_tasks', 'Assigned To')
-
-
-
-
-
 
 
 

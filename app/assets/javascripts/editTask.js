@@ -1,16 +1,6 @@
 console.log('editTask.js file loaded');
 $(document).on('turbolinks:load', function(){
 
-
-  // function statusTextColor(eventData, rowData) {
-  //   if ( rowData.status === 'inprogress' ) {
-  //     console.log('THIS WORKED');
-  //     console.log('statusTextColore ', rowData);
-  //     console.log('statusTextColore ', eventData);
-  //     console.log('statusTextColore ', eventData);
-  //   }
-  // }
-
   $('.div-tasks').on('editable-save.bs.table', function (event, field, row, old) {
     console.log('this is event ', event)
     let oldStatus = old
@@ -68,12 +58,5 @@ $(document).on('turbolinks:load', function(){
     }
     });
   });
-
-
-      // $(event.target.children[1].childNodes[0].children[0].children[0]).removeAttr("data-value");
-      // $(event.target.children[1].childNodes[0].children[0].children[0]).attr("data-value", "blocked");
-      // event.target.children[1].childNodes[0].children[0].children[0].textContent='Blocked';
-      // console.log('THIS IS IT', event.target.children[1].childNodes[0].children[0].children[0].innerText)
-        // console.log('THIS IS IT', event.target.children[1].childNodes[0].children[0].children[0])
 
 });

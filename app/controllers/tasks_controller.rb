@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  
   def show
     # need some current user checks in here
     @task = Task.find(params[:id])

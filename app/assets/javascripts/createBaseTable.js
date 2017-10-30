@@ -11,9 +11,11 @@ $(document).on('turbolinks:load', function(){
         var tasksAssignedToMe = [];
         var tasksOtherOweMe = [];
         var tasksCreatedForMyself = [];
-        let resAssignedTasks = res.assigned_tasks
-        let resOwnedTasks = res.owned_tasks
-        let userCookieInformation = parseInt(`${document.cookie.split('id=')[1]}`)
+        let resAssignedTasks = res.assigned_tasks;
+        let resOwnedTasks = res.owned_tasks;
+        let userCookieInformation = parseInt(`${document.cookie.split('id=')[1]}`);
+        let editTaskIcon = `<span class="glyphicon glyphicon-pencil fake-span"></span>`;
+        let deleteTask = `<span class="glyphicon glyphicon-trash fake-span"></span>`;
         // console.log('THIS IS USER COOKIE INFO - ', userCookieInformation);
         // console.log(`${document.cookie.split('id=')[1]}`, resAssignedTasks.length + resOwnedTasks.length);
         for (let i = 0; i < resOwnedTasks.length ; i++) {
@@ -37,8 +39,8 @@ $(document).on('turbolinks:load', function(){
               createdDate: moment(resOwnedTasks[i].created_date).format("MM/DD/YY"),
               dueDate: moment(resOwnedTasks[i].due_date).format("MM/DD/YY"),
               id: parseInt(resOwnedTasks[i].id),
-              editTask: `<span class="glyphicon glyphicon-pencil"></span>`,
-              deleteTask: `<span class="glyphicon glyphicon-trash"></span>`,
+              editTask: editTaskIcon,
+              deleteTask: deleteTask,
               tableName: `tasksCreatedForMyself`,
             }
           )
@@ -56,8 +58,8 @@ $(document).on('turbolinks:load', function(){
               createdDate:  moment(resOwnedTasks[i].created_date).format("MM/DD/YY"),
               dueDate: moment(resOwnedTasks[i].due_date).format("MM/DD/YY"),
               id: parseInt(resOwnedTasks[i].id),
-              editTask: `<span class="glyphicon glyphicon-pencil"></span>`,
-              deleteTask: `<span class="glyphicon glyphicon-trash"></span>`,
+              editTask: editTaskIcon,
+              deleteTask: deleteTask,
               tableName: `tasksOtherOweMe`,
             }
           )
@@ -78,8 +80,8 @@ $(document).on('turbolinks:load', function(){
           createdDate: moment(resAssignedTasks[i].created_date).format("MM/DD/YY"),
           dueDate: moment(resAssignedTasks[i].due_date).format("MM/DD/YY"),
           id: parseInt(resAssignedTasks[i].id),
-          editTask: `<span class="glyphicon glyphicon-pencil fake-span"></span>`,
-          deleteTask: `<span class="glyphicon glyphicon-trash fake-span"></span>`,
+          editTask: editTaskIcon,
+          deleteTask: deleteTask,
           tableName: `tasksAssignedToMe`,
         })
       }
