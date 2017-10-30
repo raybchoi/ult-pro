@@ -86,7 +86,7 @@
 
 
 
-
+  <% if user_signed_in? %>
     <div>
       <div class='div-date-time-user-info'>
         <section class='section-date-time-user-info'>
@@ -96,8 +96,17 @@
         </section>
       </div>
     </div>
-
-
+  <% else %>
+    <!-- <div>
+      <div class='div-date-time-user-info'>
+        <section class='section-date-time-user-info'>
+            <h1 class='welcome-name'>Check out Ult Pro <h1>
+            <div class="date front-page" id='date'></div>
+            <div class="clock front-page"></div>
+        </section>
+      </div>
+    </div> -->
+  <% end %>
     <div class='container'>
 
 

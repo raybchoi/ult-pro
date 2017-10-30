@@ -29,7 +29,7 @@ class TasksController < ApplicationController
       @task = Task.find_by_id(params[:id])
       if @task.update(task_params)
         respond_to do |format|  ## Add this
-          format.json { render json: @task, status: :ok}
+          format.json { render :show, status: :ok}
         end                    ## Add this
       else
         respond_to do |format|  ## Add this

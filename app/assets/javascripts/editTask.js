@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function(){
     let oldStatus = old
     console.log('this is oldStatus ', oldStatus)
     let updateTaskStatusData;
-    if ( `${row.status}` === 'complete' ) {
+    if ( `${row.status}` === 'completed' ) {
       updateTaskStatusData = { task:
         {
           status: `${row.status}`,
@@ -27,6 +27,7 @@ $(document).on('turbolinks:load', function(){
       updateTaskStatusData = { task:
         {
           status: `${row.status}`,
+          completed_date: '',
         }
       };
     }

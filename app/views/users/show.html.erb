@@ -17,7 +17,8 @@
         <input type='text' id='task-title' autocomplete="off" maxlength=120 required/>
 
         <label for="task-description">Description</label>
-        <input type='text' id='task-description' maxlength=200 autocomplete="off"  required/>
+        <!-- <input type='text' id='task-description' maxlength=200 autocomplete="off"  required/> -->
+        <textarea type='text' id='task-description' autocomplete="off" required/></textarea>
 
         <label for="create-task-date-picker">When is this due?</label>
         <input type='text' id="create-task-date-picker" autocomplete="off"  placeholder='mm/dd/yyyy' required>
@@ -34,7 +35,7 @@
   </section>
 
   <section class='section-others-tasks section-tasks col-12'>
-    <h2 class='h2-task-header'>Tasks Others Owe Me</h2>
+    <h2 class='h2-task-header'>Tasks Owed To Me</h2>
     <div class='tasks_others_owe_me_div div-tasks'>
       <table id="tasks_others_owe_me"></table>
     </div>

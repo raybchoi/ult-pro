@@ -56,7 +56,7 @@ $(document).on('turbolinks:load', function(){
             createTaskHtmlModal (res, 'In Progress')
           } else if ( res.status === 'blocked' ) {
             createTaskHtmlModal (res, 'Blocked')
-          } else if ( res.status === 'complete' ) {
+          } else if ( res.status === 'completed' ) {
             console.log('closed');
             taskHtml =
             `
@@ -102,7 +102,7 @@ $(document).on('turbolinks:load', function(){
           // $('#tasks_assigned_to_me').bootstrapTable('refresh');
         },
 
-        
+
       })
       }
     });

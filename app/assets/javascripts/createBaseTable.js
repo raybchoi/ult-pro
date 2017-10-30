@@ -1,6 +1,8 @@
 console.log('renderAllTasksForOneUser.js file loaded');
 $(document).on('turbolinks:load', function(){
+
   function renderAllTasksForOneUser() {
+    console.log('LOADING ALL USERS');
     $.ajax({
       method: 'GET',
       url: `http://localhost:3000/users/${document.cookie.split('id=')[1]}.json`,
@@ -34,7 +36,7 @@ $(document).on('turbolinks:load', function(){
               taskAssigneeId: `${resOwnedTasks[i].assignee_info.id}`,
               createdDate: moment(resOwnedTasks[i].created_date).format("MM/DD/YY"),
               dueDate: moment(resOwnedTasks[i].due_date).format("MM/DD/YY"),
-              id: resOwnedTasks[i].id,
+              id: parseInt(resOwnedTasks[i].id),
               editTask: `<span class="glyphicon glyphicon-pencil"></span>`,
               deleteTask: `<span class="glyphicon glyphicon-trash"></span>`,
               tableName: `tasksCreatedForMyself`,
@@ -53,7 +55,7 @@ $(document).on('turbolinks:load', function(){
               taskAssigneeId: `${resOwnedTasks[i].owner_info.id}`,
               createdDate:  moment(resOwnedTasks[i].created_date).format("MM/DD/YY"),
               dueDate: moment(resOwnedTasks[i].due_date).format("MM/DD/YY"),
-              id: resOwnedTasks[i].id,
+              id: parseInt(resOwnedTasks[i].id),
               editTask: `<span class="glyphicon glyphicon-pencil"></span>`,
               deleteTask: `<span class="glyphicon glyphicon-trash"></span>`,
               tableName: `tasksOtherOweMe`,
@@ -75,7 +77,7 @@ $(document).on('turbolinks:load', function(){
           taskAssigneeId: `${resAssignedTasks[i].assignee_info.id}`,
           createdDate: moment(resAssignedTasks[i].created_date).format("MM/DD/YY"),
           dueDate: moment(resAssignedTasks[i].due_date).format("MM/DD/YY"),
-          id: resAssignedTasks[i].id,
+          id: parseInt(resAssignedTasks[i].id),
           editTask: `<span class="glyphicon glyphicon-pencil fake-span"></span>`,
           deleteTask: `<span class="glyphicon glyphicon-trash fake-span"></span>`,
           tableName: `tasksAssignedToMe`,
@@ -85,9 +87,10 @@ $(document).on('turbolinks:load', function(){
     // console.log('tasksOtherOweMe - ', tasksOtherOweMe);
     // console.log('tasksAssignedToMe - ', tasksAssignedToMe);
     // console.log('tasksCreatedForMyself - ', tasksCreatedForMyself);
-    createTasksTable(tasksAssignedToMe, '#tasks_assigned_to_me')
-    createTasksTable(tasksOtherOweMe, '#tasks_others_owe_me')
-    createTasksTable(tasksCreatedForMyself, '#my_own_tasks')
+    createTasksTable(tasksAssignedToMe, '#tasks_assigned_to_me', 'Assigned By')
+    createTasksTable(tasksOtherOweMe, '#tasks_others_owe_me', 'Assigned To')
+    createTasksTable(tasksCreatedForMyself, '#my_own_tasks', 'Assigned To')
+
   },
   error: function(err) {
     $.notify({
@@ -107,11 +110,15 @@ $(document).on('turbolinks:load', function(){
 });
 };
 
-if ( window.location.href === `http://localhost:3000/users/${document.cookie.split('id=')[1]}` ) {
-  renderAllTasksForOneUser();
-}
+function renderAllTaskFirstTime() {
+  if ( window.location.href === `http://localhost:3000/users/${document.cookie.split('id=')[1]}` ) {
+    renderAllTasksForOneUser()
+  };
+};
+renderAllTaskFirstTime()
 
-function createTasksTable (taskData, tableIdFor){
+
+function createTasksTable (taskData, tableIdFor, nameOfAssignedToColumnName){
 
   // console.log('createTableTasksAssignedToMe - ', tableIdFor);
   $(tableIdFor).bootstrapTable({
@@ -127,7 +134,7 @@ function createTasksTable (taskData, tableIdFor){
             {value: 'open', text: 'Open'},
             {value: 'inprogress', text: 'In Progress'},
             {value: 'blocked', text: 'Blocked'},
-            {value: 'complete', text: 'Complete'}
+            {value: 'completed', text: 'Completed'}
           ],
         },
       }, {
@@ -145,7 +152,7 @@ function createTasksTable (taskData, tableIdFor){
       },
       {
         field: 'taskResponsibleOwner',
-        title: 'Responsible',
+        title: nameOfAssignedToColumnName,
         sortable: true,
         width: '5%',
         // editable: true,
@@ -174,14 +181,13 @@ function createTasksTable (taskData, tableIdFor){
         width: '2.5%',
         align: 'center',
       },
-      // {
-      //   field: 'id',
-      //   title: 'id',
-      //   sortable: true,
-      //   width: '10%',
-      //   class: 'table-header',
-      // },
+      {
+        field: 'id',
+        title: 'id',
+        visible: false,
+      },
     ],
+    uniqueId: 'id',
     data: taskData,
     showHeader: true,
     pagination: true,
@@ -197,6 +203,12 @@ function createTasksTable (taskData, tableIdFor){
   });
   // function rowStyle(0);
 };
+
+
+
+
+
+
 
 // end of document.ready
 });
