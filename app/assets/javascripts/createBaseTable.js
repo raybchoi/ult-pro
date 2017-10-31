@@ -3,9 +3,10 @@ $(document).on('turbolinks:load', function(){
   function renderAllTasksForOneUser() {
     // console.log('LOADING ALL USERS');
     // let ajaxurl = 'http://localhost:3000/users/'
+    let url = "https://chilling-mausoleum-21805.herokuapp.com"
     $.ajax({
       method: 'GET',
-      url: `/users/${document.cookie.split('id=')[1]}.json`,
+      url: `${url}/users/${document.cookie.split('id=')[1]}.json`,
       success: function(res){
         // console.log('Response - ', res);
         var tasksAssignedToMe = [];

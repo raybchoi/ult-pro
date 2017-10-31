@@ -1,0 +1,38 @@
+/* line 1, /Users/raychoi/WDI/ult_pro/app/assets/stylesheets/main.scss */
+body {
+  background-color: darkgrey;
+  width: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: left;
+}
+
+/* line 10, /Users/raychoi/WDI/ult_pro/app/assets/stylesheets/main.scss */
+.devise-label {
+  color: white;
+}
+
+/* line 14, /Users/raychoi/WDI/ult_pro/app/assets/stylesheets/main.scss */
+a.navbar-brand, a.nav-bar-user-info, a.dropdown-toggle {
+  background: tranparent !important;
+  color: white !important;
+  font-size: 125%;
+}
+
+/* line 21, /Users/raychoi/WDI/ult_pro/app/assets/stylesheets/main.scss */
+.nav-bar-toggle-span {
+  background-color: #E8E8E8 !important;
+}
+
+/* line 24, /Users/raychoi/WDI/ult_pro/app/assets/stylesheets/main.scss */
+.dropdown-for-nav-bar {
+  background: transparent;
+}
+
+/* line 27, /Users/raychoi/WDI/ult_pro/app/assets/stylesheets/main.scss */
+a:hover {
+  color: white !important;
+  font-style: italic;
+}

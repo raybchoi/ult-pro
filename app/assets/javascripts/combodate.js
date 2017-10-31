@@ -19,7 +19,7 @@
 * Project page: http://github.com/vitalets/combodate
 * Copyright (c) 2012 Vitaliy Potapov. Released under MIT License.
 **/
-console.log('combodate loaded');
+// console.log('combodate loaded');
 (function ($) {
 
     var Combodate = function (element, options) {

@@ -1,7 +1,7 @@
-console.log('showModalForOneTask.js file loaded');
+// console.log('showModalForOneTask.js file loaded');
 $(document).on('turbolinks:load', function(){
 
-
+  let url = "https://chilling-mausoleum-21805.herokuapp.com"
   $('.div-tasks').on('click-cell.bs.table', function (event, field, old, row) {
     // console.log('click-cell.bs.table file loaded ', field)
     // console.log('click-cell.bs.table file loaded ', row.id);
@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function(){
     if ( field === 'title' ) {
       $.ajax({
         method: 'GET',
-        url: `/tasks/${row.id}.json`,
+        url: `${url}/tasks/${row.id}.json`,
         success: function(res) {
           $('.show-modal').remove();
           console.log('DATA returned from showModalForOneTask', res);

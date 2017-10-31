@@ -1,6 +1,6 @@
-console.log('editTask.js file loaded');
+// console.log('editTask.js file loaded');
 $(document).on('turbolinks:load', function(){
-
+  let url = "https://chilling-mausoleum-21805.herokuapp.com"
   $('.div-tasks').on('editable-save.bs.table', function (event, field, row, old) {
     // console.log('this is event ', event)
     let oldStatus = old
@@ -23,7 +23,7 @@ $(document).on('turbolinks:load', function(){
     }
     $.ajax({
     method: 'PUT',
-    url: `/tasks/${row.id}`,
+    url: `${url}/tasks/${row.id}`,
     data: updateTaskStatusData,
     success: function(res) {
       // console.log('DATA returned from updateTaskStatusData', res);

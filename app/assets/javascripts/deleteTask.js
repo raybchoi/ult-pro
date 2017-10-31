@@ -1,7 +1,8 @@
-console.log('delete.js file loaded');
+// console.log('delete.js file loaded');
 $(document).on('turbolinks:load', function(){
   $('.div-tasks').on('click-cell.bs.table', function (event, field, old, row) {
     // console.log('THIS IS DELETE - ', row);
+    let url = "https://chilling-mausoleum-21805.herokuapp.com"
     let deleteTaskInfo;
     function deleteSingleTask (row, tableName) {
       swal({
@@ -20,7 +21,7 @@ $(document).on('turbolinks:load', function(){
           };
           $.ajax({
             method: 'DELETE',
-            url: `/tasks/${row.id}`,
+            url: `${url}/tasks/${row.id}`,
             data: deleteTaskInfo,
             success: function(res) {
               $(tableName).bootstrapTable('removeByUniqueId', res.id);

@@ -1,11 +1,12 @@
-console.log('createNewTask.js file loaded');
+// console.log('createNewTask.js file loaded');
 $(document).on('turbolinks:load', function(){
   // initial ajax call
+  let url = "https://chilling-mausoleum-21805.herokuapp.com"
   let jsonResponseFromGetAllUsers;
   function getAllUsers() {
     $.ajax({
       method: 'get',
-      url: `/users.json`,
+      url: `${url}/users.json`,
       success: function(res) {
         jsonResponseFromGetAllUsers = res
         // console.log('all users - ', jsonResponseFromGetAllUsers);
@@ -182,7 +183,7 @@ $(document).on('turbolinks:load', function(){
 
       $.ajax({
         method: 'POST',
-        url: `/tasks`,
+        url: `${url}/tasks`,
         data: newTaskInfo,
         success: function(newlyCreatedTaskData) {
           // console.log('DATA returned from createNewTask', newlyCreatedTaskData);
@@ -367,7 +368,7 @@ $(document).on('turbolinks:load', function(){
         // console.log('showEditAndUpdateSingleTask - tableName INFO', tableName );
         $.ajax({
           method: 'GET',
-          url: `/tasks/${row.id}.json`,
+          url: `${url}/tasks/${row.id}.json`,
           success: function(res) {
 
             $('.edit-drawer').remove();
@@ -403,7 +404,7 @@ $(document).on('turbolinks:load', function(){
               // console.log('runAjaxCallToUpdateSingleTask tableName - ', tableName);
               $.ajax({
                 method: 'PUT',
-                url: `/tasks/${resFromGettingRowDataAjaxCall.id}`,
+                url: `${url}/tasks/${resFromGettingRowDataAjaxCall.id}`,
                 data: updatedTaskInfo,
                 success: function(res) {
                   // console.log('DATA returned from runAjaxCallToUpdateSingleTask', res);
