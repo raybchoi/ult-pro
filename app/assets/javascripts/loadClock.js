@@ -2,7 +2,7 @@
 $(document).on('turbolinks:load', function(){
   let url = "https://chilling-mausoleum-21805.herokuapp.com"
   function renderClock() {
-    if ( window.location.href === `${url}${document.cookie.split('id=')[1]}` ) {
+    if ( window.location.href === `${url}/users/${document.cookie.split('id=')[1]}` ) {
       let clock = $('.clock').FlipClock({
         clockFace: 'TwelveHourClock'
       });

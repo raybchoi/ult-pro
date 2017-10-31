@@ -112,7 +112,7 @@ $(document).on('turbolinks:load', function(){
 };
 
 function renderAllTaskFirstTime() {
-  if ( window.location.href === `http://localhost:3000/users/${document.cookie.split('id=')[1]}` ) {
+  if ( window.location.href === `${url}/${document.cookie.split('id=')[1]}` ) {
     renderAllTasksForOneUser()
   };
 };
