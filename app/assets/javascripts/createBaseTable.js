@@ -4,6 +4,7 @@ $(document).on('turbolinks:load', function(){
     // console.log('LOADING ALL USERS');
     // let ajaxurl = 'http://localhost:3000/users/'
     let url = "https://chilling-mausoleum-21805.herokuapp.com"
+    console.log('createBaseTable - ', `${url}/users/${document.cookie.split('id=')[1]}.json`);
     $.ajax({
       method: 'GET',
       url: `${url}/users/${document.cookie.split('id=')[1]}.json`,
