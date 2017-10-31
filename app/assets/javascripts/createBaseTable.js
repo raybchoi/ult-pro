@@ -1,11 +1,12 @@
 // console.log('renderAllTasksForOneUser.js file loaded');
 $(document).on('turbolinks:load', function(){
   let url = "https://chilling-mausoleum-21805.herokuapp.com"
+
   function renderAllTasksForOneUser() {
     // console.log('LOADING ALL USERS');
     // let ajaxurl = 'http://localhost:3000/users/'
+  console.log('createBaseTable - ', `${url}/users/${document.cookie.split('id=')[1]}.json`);
 
-    console.log('createBaseTable - ', `${url}/users/${document.cookie.split('id=')[1]}.json`);
     $.ajax({
       method: 'GET',
       url: `${url}/users/${document.cookie.split('id=')[1]}.json`,
@@ -113,7 +114,7 @@ $(document).on('turbolinks:load', function(){
 };
 
 function renderAllTaskFirstTime() {
-  if ( window.location.href === `${url}/${document.cookie.split('id=')[1]}` ) {
+  if ( window.location.href === `${url}/users/${document.cookie.split('id=')[1]}` ) {
     renderAllTasksForOneUser()
   };
 };
