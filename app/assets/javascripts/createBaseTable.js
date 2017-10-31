@@ -2,9 +2,10 @@
 $(document).on('turbolinks:load', function(){
   function renderAllTasksForOneUser() {
     // console.log('LOADING ALL USERS');
+    // let ajaxurl = 'http://localhost:3000/users/'
     $.ajax({
       method: 'GET',
-      url: `http://localhost:3000/users/${document.cookie.split('id=')[1]}.json`,
+      url: `/users/${document.cookie.split('id=')[1]}.json`,
       success: function(res){
         // console.log('Response - ', res);
         var tasksAssignedToMe = [];

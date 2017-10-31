@@ -192,8 +192,6 @@ $(document).on('turbolinks:load', function(){
           } else {
             addNewTaskToTable (newlyCreatedTaskData, tableTypeToAppend, `tasksOtherOweMe`)
           };
-          // $("#task-type").val('default');
-          // $("#task-type").selectpicker("refresh");
           $('#form-create-new-task')[0].reset();
           resetFormToBeginning("#div-id-task-assignee", "div-class-assign-task");
           return
@@ -209,9 +207,9 @@ $(document).on('turbolinks:load', function(){
 
 
     $('.div-tasks').on('click-cell.bs.table', function (event, field, old, row) {
-      console.log('on edit cell this is the field - ', field);
-      console.log('on edit cell this is the event - ', event);
-      console.log('on edit cell this is the row - ', row);
+      // console.log('on edit cell this is the field - ', field);
+      // console.log('on edit cell this is the event - ', event);
+      // console.log('on edit cell this is the row - ', row);
       let editTaskHtml;
       let selectPickerHtml;
       let assignedIndividualTypeAheadHtml;
@@ -365,15 +363,15 @@ $(document).on('turbolinks:load', function(){
       }
 
       function showEditAndUpdateSingleTask (row, tableName) {
-        console.log('showEditAndUpdateSingleTask - ROW INFO', row );
-        console.log('showEditAndUpdateSingleTask - tableName INFO', tableName );
+        // console.log('showEditAndUpdateSingleTask - ROW INFO', row );
+        // console.log('showEditAndUpdateSingleTask - tableName INFO', tableName );
         $.ajax({
           method: 'GET',
-          url: `http://localhost:3000/tasks/${row.id}.json`,
+          url: `/tasks/${row.id}.json`,
           success: function(res) {
 
             $('.edit-drawer').remove();
-            console.log('DATA returned from editFullTaskTask', res);
+            // console.log('DATA returned from editFullTaskTask', res);
             // create the different html form
             editTaskHtmlDrawer(res);
             insertStatusSelectPickerDrawer(res);
@@ -408,7 +406,7 @@ $(document).on('turbolinks:load', function(){
                 url: `/tasks/${resFromGettingRowDataAjaxCall.id}`,
                 data: updatedTaskInfo,
                 success: function(res) {
-                  console.log('DATA returned from runAjaxCallToUpdateSingleTask', res);
+                  // console.log('DATA returned from runAjaxCallToUpdateSingleTask', res);
                   $.notify({
                     title: '<strong>Yay!</strong>',
                     message: 'Status was updated.'
@@ -423,7 +421,7 @@ $(document).on('turbolinks:load', function(){
                     timer: 1000,
                   });
                   // if the assignee ID is the same as the cookie id then update the row
-                  console.log('resFromAjax response - ', res);
+                  // console.log('resFromAjax response - ', res);
 
                   function updateTableWhereAssigneeNameDoesNotChange (resFromAjaxCallToGetTaskInfo, nameOfTableToUpdate) {
                     $(nameOfTableToUpdate).bootstrapTable('updateByUniqueId', {
@@ -451,19 +449,19 @@ $(document).on('turbolinks:load', function(){
 
                   if ( tableName === '#tasks_assigned_to_me' ) {
                     if ( parseInt(`${document.cookie.split('id=')[1]}`) === res.assignee_info.id ) {
-                      console.log('THIS IS TABLE NAME if table = #tasks_assigned_to_me - ', tableName);
-                      console.log('THIS IS RES.id if table = #tasks_assigned_to_me - ', res.id);
+                      // console.log('THIS IS TABLE NAME if table = #tasks_assigned_to_me - ', tableName);
+                      // console.log('THIS IS RES.id if table = #tasks_assigned_to_me - ', res.id);
                       updateTableWhereAssigneeNameDoesNotChange(res, tableName)
                     } else {
-                      console.log('THIS IS TABLE NAME IF NOT MINE if table = #tasks_assigned_to_me - ', tableName);
-                      console.log('THIS IS res NAME IF NOT MINE if table = #tasks_assigned_to_me - ', res);
-                      console.log('THIS IS RES.id IF NOT MINE if table = #tasks_assigned_to_me - ', res.id);
+                      // console.log('THIS IS TABLE NAME IF NOT MINE if table = #tasks_assigned_to_me - ', tableName);
+                      // console.log('THIS IS res NAME IF NOT MINE if table = #tasks_assigned_to_me - ', res);
+                      // console.log('THIS IS RES.id IF NOT MINE if table = #tasks_assigned_to_me - ', res.id);
                       $(tableName).bootstrapTable('removeByUniqueId', res.id)
                     };
                   } else if ( tableName === '#tasks_others_owe_me' ) {
                     console.log('#tasks_others_owe_me - ', res);
                     if ( ( parseInt(`${document.cookie.split('id=')[1]}`) === res.owner_info.id ) && ( parseInt(`${document.cookie.split('id=')[1]}`) === res.assignee_info.id ) ) {
-                      console.log(' THIS IS RES if table = #tasks_others_owe_me IF cookie all matches - ', res);
+                      // console.log(' THIS IS RES if table = #tasks_others_owe_me IF cookie all matches - ', res);
                       $(tableName).bootstrapTable('removeByUniqueId', res.id)
                       addNewTaskToTable(res, '#my_own_tasks', 'tasksCreatedForMyself')
                     } else {
@@ -563,18 +561,18 @@ $(document).on('turbolinks:load', function(){
       }
 
       if ( field === 'editTask' && row.tableName === 'tasksAssignedToMe' ) {
-        console.log('EDIT TASK THAT IS ASSIGNED TO ME -')
+        // console.log('EDIT TASK THAT IS ASSIGNED TO ME -')
         showEditAndUpdateSingleTask(row, '#tasks_assigned_to_me');
-        console.log('EDIT TASK THAT IS ASSIGNED TO ME -', row);
+        // console.log('EDIT TASK THAT IS ASSIGNED TO ME -', row);
 
       } else if ( field === 'editTask' && row.tableName === 'tasksOtherOweMe' ) {
-        console.log('EDIT TASK OTHERS OWE ME');
+        // console.log('EDIT TASK OTHERS OWE ME');
         showEditAndUpdateSingleTask(row, '#tasks_others_owe_me');
-        console.log('EDIT TASK OTHERS OWE ME - ', row);
+        // console.log('EDIT TASK OTHERS OWE ME - ', row);
       } else if ( field === 'editTask' && row.tableName === 'tasksCreatedForMyself' ) {
-        console.log('EDIT TASK CREATED FOR MYSELF');
+        // console.log('EDIT TASK CREATED FOR MYSELF');
         showEditAndUpdateSingleTask(row, '#my_own_tasks');
-        console.log('EDIT TASK CREATED FOR MYSELF - ', row);
+        // console.log('EDIT TASK CREATED FOR MYSELF - ', row);
       }
 
     });

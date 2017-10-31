@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function(){
     if ( field === 'title' ) {
       $.ajax({
         method: 'GET',
-        url: `http://localhost:3000/tasks/${row.id}.json`,
+        url: `/tasks/${row.id}.json`,
         success: function(res) {
           $('.show-modal').remove();
           console.log('DATA returned from showModalForOneTask', res);
@@ -99,24 +99,10 @@ $(document).on('turbolinks:load', function(){
           }
           $('.show-modal-outer-div').append(taskHtml);
           $('#showOneTask').modal('show');
-          // $('#tasks_assigned_to_me').bootstrapTable('refresh');
         },
-
 
       })
       }
     });
 
-
-
-  // $('#showOneTask').on('show.bs.modal', function (event) {
-  //   console.log('showModalForOneTask.js file loaded ',event);
-  //   var button = $(event.relatedTarget) // Button that triggered the modal
-  //   var recipient = button.data('whatever') // Extract info from data-* attributes
-  //   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  //   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  //   var modal = $(this)
-  //   modal.find('.modal-title').text('New message to ' + recipient)
-  //   modal.find('.modal-body input').val(recipient)
-  // });
 });

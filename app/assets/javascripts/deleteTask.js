@@ -1,7 +1,7 @@
 console.log('delete.js file loaded');
 $(document).on('turbolinks:load', function(){
   $('.div-tasks').on('click-cell.bs.table', function (event, field, old, row) {
-    console.log('THIS IS DELETE - ', row);
+    // console.log('THIS IS DELETE - ', row);
     let deleteTaskInfo;
     function deleteSingleTask (row, tableName) {
       swal({
@@ -24,24 +24,10 @@ $(document).on('turbolinks:load', function(){
             data: deleteTaskInfo,
             success: function(res) {
               $(tableName).bootstrapTable('removeByUniqueId', res.id);
-              console.log('DATA returned from deleteAjaxCall', res);
-
+              // console.log('DATA returned from deleteAjaxCall', res);
               swal("Poof! Your task has been deleted!", {
                 icon: "success",
               });
-              // $.notify({
-              //   title: '<strong>Yay!</strong>',
-              //   message: 'Task was deleted.'
-              // },{
-              //   type: 'success',
-              //   timer: 1000,
-              //   placement: {
-              //     from: "top",
-              //     align: "right"
-              //   },
-              //   delay: 5000,
-              //   timer: 1000,
-              // });
             },
             error: function(err) {
               $.notify({

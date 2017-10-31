@@ -2,9 +2,9 @@ console.log('editTask.js file loaded');
 $(document).on('turbolinks:load', function(){
 
   $('.div-tasks').on('editable-save.bs.table', function (event, field, row, old) {
-    console.log('this is event ', event)
+    // console.log('this is event ', event)
     let oldStatus = old
-    console.log('this is oldStatus ', oldStatus)
+    // console.log('this is oldStatus ', oldStatus)
     let updateTaskStatusData;
     if ( `${row.status}` === 'completed' ) {
       updateTaskStatusData = { task:
@@ -26,7 +26,7 @@ $(document).on('turbolinks:load', function(){
     url: `/tasks/${row.id}`,
     data: updateTaskStatusData,
     success: function(res) {
-      console.log('DATA returned from updateTaskStatusData', res);
+      // console.log('DATA returned from updateTaskStatusData', res);
       $.notify({
         title: '<strong>Yay!</strong>',
         message: 'Status was updated.'
