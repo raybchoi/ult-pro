@@ -36,11 +36,20 @@ body{
     box-shadow: none;
 }
 
-a.navbar-brand, a.nav-bar-user-info {
+a.navbar-brand, a.nav-bar-user-info, a.dropdown-toggle, {
+  background: transparent !important;
+  // color: #E8E8E8 !important;
   color: #E8E8E8 !important;
   font-size: 125%
 }
 
 .nav-bar-toggle-span {
   background-color: #E8E8E8 !important;
+}
+.dropdown-for-nav-bar {
+  background: transparent;
+}
+a:hover {
+  color: black !important;
+  font-style: italic;
 }

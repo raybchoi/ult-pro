@@ -95,19 +95,19 @@ $(document).on('turbolinks:load', function(){
 
   },
   error: function(err) {
-    $.notify({
-      title: '<strong>Sorry!</strong>',
-      message: 'We ran into an error. Could you refresh the screen'
-    },{
-      type: 'warning',
-      timer: 1000,
-      placement: {
-        from: "top",
-        align: "right"
-      },
-      delay: 5000,
-      timer: 1000,
-    });
+  //   $.notify({
+  //     title: '<strong>Sorry!</strong>',
+  //     message: 'We ran into an error. Could you refresh the screen'
+  //   },{
+  //     type: 'warning',
+  //     timer: 1000,
+  //     placement: {
+  //       from: "top",
+  //       align: "right"
+  //     },
+  //     delay: 5000,
+  //     timer: 1000,
+  //   });
   }
 });
 };

@@ -37,7 +37,7 @@ $(document).on('turbolinks:load', function(){
                             <span>${moment(jsonResponse.due_date).format('MMM Do YY')}</span>
                           </div>
                         </div>
-                          <h4 class='task-description'>${jsonResponse.description} %></h4>
+                          <h4 class='task-description'>${jsonResponse.description}</h4>
                         </div>
                       </section>
                     </div>

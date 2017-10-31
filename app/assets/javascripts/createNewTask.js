@@ -12,19 +12,19 @@ $(document).on('turbolinks:load', function(){
         typeAheadForUserName (res, "#div-id-task-assignee")
       },
       error: function(err) {
-        $.notify({
-          title: '<strong>Sorry!</strong>',
-          message: 'Task was not created. Can you try again?'
-        },{
-          type: 'warning',
-          timer: 1000,
-          placement: {
-            from: "top",
-            align: "right"
-          },
-          delay: 5000,
-          timer: 1000,
-        });
+        // $.notify({
+        //   title: '<strong>Sorry!</strong>',
+        //   message: 'Task was not created. Can you try again?'
+        // },{
+        //   type: 'warning',
+        //   timer: 1000,
+        //   placement: {
+        //     from: "top",
+        //     align: "right"
+        //   },
+        //   delay: 5000,
+        //   timer: 1000,
+        // });
       }
       // end of AJAX call
     });
@@ -83,7 +83,7 @@ $(document).on('turbolinks:load', function(){
     todayHighlight: true,
   });
 
-  // ------- if user hits drop down for me vs someone else -------
+  // ------- if user hits drop down for me vs someone else ------- function is not used
   function checkSelectDropDownBox (jsonData, nameOfSelectDropDownBoxWithChange, divIdToAppendAndRemoveFrom, divClassToAppendAndRemoveFrom) {
     let currentSelectedBox = $(nameOfSelectDropDownBoxWithChange).find(":selected").val()
     // console.log($(nameOfSelectDropDownBoxWithChange).find(":selected").val())
@@ -155,8 +155,14 @@ $(document).on('turbolinks:load', function(){
         notificationIfSpanTaskIsNotAssignedToAnyone();
         return;
       };
-      let getSelectDropDownId = document.getElementById("task-type")
-      let tableTypeToAppend = getSelectDropDownId.options[getSelectDropDownId.selectedIndex].value;
+      // let getSelectDropDownId = document.getElementById("task-type")
+      // let tableTypeToAppend = getSelectDropDownId.options[getSelectDropDownId.selectedIndex].value;
+      let tableTypeToAppend;
+      if ( $("#span-assigned-to").attr('data-user-id') === `${document.cookie.split('id=')[1]}` ) {
+        tableTypeToAppend = '#my_own_tasks'
+      } else {
+        tableTypeToAppend = '#tasks_others_owe_me'
+      }
       let newTaskInfo = { task:
         {
           title: $('#task-title').val(),
@@ -167,9 +173,6 @@ $(document).on('turbolinks:load', function(){
           due_date: new Date($('#create-task-date-picker').val()).getTime(),
         },
       };
-
-
-      // console.log(newTaskInfo);
 
 
       $.ajax({
@@ -184,8 +187,8 @@ $(document).on('turbolinks:load', function(){
           } else {
             addNewTaskToTable (newlyCreatedTaskData, tableTypeToAppend, `tasksOtherOweMe`)
           };
-          $("#task-type").val('default');
-          $("#task-type").selectpicker("refresh");
+          // $("#task-type").val('default');
+          // $("#task-type").selectpicker("refresh");
           $('#form-create-new-task')[0].reset();
           resetFormToBeginning("#div-id-task-assignee", "div-class-assign-task");
           return
@@ -226,52 +229,61 @@ $(document).on('turbolinks:load', function(){
         editTaskHtml =
         `
         <div class='edit-drawer'>
-        <div id="drawer-edit-task" class="drawer drawer-left dw-xs-10 dw-sm-6 dw-md-6 fold " aria-labelledby="drawerEditTask">
+          <div id="drawer-edit-task" class="drawer drawer-left dw-xs-10 dw-sm-6 dw-md-6 fold " aria-labelledby="drawerEditTask">
 
-        <div class="drawer-heading">
-        <h2 class="drawer-title">Update Task</h2>
+            <div class="drawer-heading">
+              <h2 class="drawer-title">Update Task</h2>
+            </div>
+            <div class="drawer-body">
+
+              <div class='update-task-fields'>
+                <section class='section-update-task'>
+
+
+                      <form id='form-update-task' name='form-update-task'>
+
+                      <div class='update-field'>
+                        <label for="task-title">Title: </label>
+                        <input type='text' id='task-title-drawer' autocomplete="off" value='${res.title}' maxlength=120 required/>
+                      </div>
+
+                      <div class='update-field'>
+                        <label for="task-assignee_id-drawer">Assign this task to someone else?</label>
+                        <input id="openAssignIdCheckMarkBox" type="checkbox"/>
+                        <div class='appendUserInputBox'> </div>
+                      </div>
+
+                      <div class='update-field'>
+                        <label for="task-description">Description: </label>
+                        <textarea id='task-description-drawer' autocomplete="off" required> ${res.description}</textarea>
+                      </div>
+
+                      <div class='update-field'>
+                        <label for="due-date-task-date-picker">When is this due?</label>
+                        <input type='text' id="due-date-task-date-picker" autocomplete="off"  value='${moment(res.due_date).format('MM/DD/YY')}' required>
+                      </div>
+
+
+
+                      <div class='update-field'>
+                        <div class='select-picker-goes-here'>Status: </div>
+                      </div>
+
+                      <div class='update-field'>
+                        <button type='submit' class='btn btn-primary update-task-button'>Update Task</button>
+
+                        <button class='btn btn-primary' data-toggle="drawer" aria-controls="drawerEditTask" href="#drawer-edit-task">Close</button>
+
+                      </div>
+                  </div>
+                </form>
+              </section>
+
+            </div>
+          </div>
         </div>
-        <div class="drawer-body">
-
-        <section class='section-update-task'>
-        <div class="update-task">
-
-        <form id='form-update-task' name='form-update-task'>
-
-        <label for="task-type">Who is this for?</label>
-
-
-        <label for="task-title">Title</label>
-        <input type='text' id='task-title-drawer' autocomplete="off" value='${res.title}' maxlength=120 required/>
-
-
-
-
-        <label for="task-assignee_id-drawer">Assign this task to someone else?</label>
-        <input id="openAssignIdCheckMarkBox" type="checkbox"/>
-        <div class='appendUserInputBox'>
         </div>
 
-        <label for="task-description">Description</label>
-        <textarea id='task-description-drawer' autocomplete="off" required> ${res.description}</textarea>
-
-        <label for="due-date-task-date-picker">When is this due?</label>
-        <input type='text' id="due-date-task-date-picker" autocomplete="off"  value='${moment(res.due_date).format('MM/DD/YY')}' required>
-
-
-        <button type='submit' class='btn update-task-button'>Update Task</button>
-
-
-        <div class='select-picker-goes-here'></div>
-        </form>
-        <a href="#drawer-edit-task" data-toggle="drawer" aria-controls="drawerEditTask" class="btn btn-primary btn-sm">Close</a>
-        </div>
-        </section>
-
-        </div>
-        </div>
-        </div>
-        </div>
         `
       };
 

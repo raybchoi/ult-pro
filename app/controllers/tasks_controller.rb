@@ -1,8 +1,13 @@
 class TasksController < ApplicationController
-  
+
   def show
     # need some current user checks in here
-    @task = Task.find(params[:id])
+    if user_check
+      @task = Task.find(params[:id])
+    else
+      flash[:notice] = "Sorry! Looks likes you went to the wrong place :("
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def new
@@ -41,10 +46,29 @@ class TasksController < ApplicationController
     flash[:error] = "Cannot Update Status"
     end
   end
+
+
+  def destroy
+    if user_check
+      @task = Task.find_by_id(params[:id])
+      if @task.update(task_params)
+        respond_to do |format|  ## Add this
+          format.json { render :show, status: :ok}
+        end                    ## Add this
+      else
+        respond_to do |format|  ## Add this
+          format.json { render json: @task.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+    flash[:error] = "Cannot Update Status"
+    end
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :assignee_id, :owner_id, :due_date, :meeting_id, :status, :completed_date)
+    params.require(:task).permit(:title, :description, :assignee_id, :owner_id, :due_date, :meeting_id, :status, :completed_date, :delete_flag)
   end
 
   def update_task

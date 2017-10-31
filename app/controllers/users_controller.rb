@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :user_check
+  # before_action :user_check, only: [:edit, :show, :update]
   before_action :find_user, only: [:edit, :show, :update]
 
   def index
@@ -7,12 +7,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    if user_check
-      @user
-    else
-      flash[:notice] = "Sorry! Looks likes you went to the wrong place :("
-      redirect_back(fallback_location: root_path)
-    end
+    redirect_to user_path(current_user.id) if params[:id] != current_user.id.to_s
+    @show_header = true
+    @user
   end
 
   def new
@@ -34,19 +31,20 @@ class UsersController < ApplicationController
   def user_check
   end
 
+
+
   private
 
   def find_user
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
-  def user_check
-    @user = User.find_by_id(params[:id])
-    if current_user.id == @user.id
-      true
-    else
-      false
-    end
-  end
+  # def user_check
+  #   if current_user.id == User.find_by_id(params[:id]).id
+  #     true
+  #   else
+  #     false
+  #   end
+  # end
 
 end

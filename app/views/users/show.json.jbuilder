@@ -43,6 +43,9 @@ json.url user_url(@user, format: :json)
 
 json.owned_tasks do
   json.array!(@user.owned_tasks) do |owned_task|
+    # do not send deleted items
+    if owned_task.delete_flag != 'true'
+
     json.id owned_task.id
     json.title owned_task.title
     json.description owned_task.description
@@ -76,13 +79,17 @@ json.owned_tasks do
     json.owner_info owned_task.owner
     json.assignee_info owned_task.assignee
     # json.creator_info owned_task.creator
-
+    # end of delete_flag if statement
+    end
   end
 end
 
 
 json.assigned_tasks do
   json.array!(@user.assigned_tasks) do |assigned_task|
+    # do not send deleted items
+    if assigned_task.delete_flag != 'true'
+
     json.id assigned_task.id
     json.title assigned_task.title
     json.description assigned_task.description
@@ -115,6 +122,7 @@ json.assigned_tasks do
     json.owner_info assigned_task.owner
     json.assignee_info assigned_task.assignee
     # json.creator_info assigned_task.creator
-
+    # end of the deleteFlag
+    end
   end
 end

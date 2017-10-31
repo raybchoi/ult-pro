@@ -17,4 +17,22 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
   :lockable
+
+
+  # instead of deleting, indicate the user requested a delete & timestamp it
+  # https://github.com/plataformatec/devise/wiki/How-to:-Soft-delete-a-user-when-user-deletes-account
+  def soft_delete
+    update_attribute(:delete_flag, Time.current)
+  end
+
+  # ensure user account is active
+  def active_for_authentication?
+    super && !delete_flag
+  end
+
+  # provide a custom message for a deleted account
+  def inactive_message
+  	!delete_flag ? super : :deleted_account
+  end
+
 end

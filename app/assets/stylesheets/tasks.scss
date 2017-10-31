@@ -12,6 +12,8 @@
 .div-class-assign-task {
   border-style: solid;
   border-color: black;
+  border-width: 1px;
+  border-color: lightgrey;
 }
 .section-tasks {
   position: relative;
@@ -81,6 +83,10 @@
   font-weight: bold;
 }
 
+#task-title, #task-description {
+  display: block;
+  width: 100%;
+}
 // .datepicker {
 //   z-index: 2000 !important;
 // }
@@ -97,3 +103,37 @@
 //   color: gray;
 //   font-style: italic;
 // }
+
+// UPDATING THE SHOW PAGE FOR CREATING A TASk
+// .new-task-fields{
+//   display: flex;
+//   flex-wrap: wrap;
+// }
+// .new-task-individual-fields{
+//   display: flex;
+//   flex: 0 0 50%;
+//   justify-content: space-around;
+//   align-items: center;
+//   padding: 10px;
+//
+//   .div-class-assign-task {
+//     width: 100%;
+//     display: flex;
+//     margin-left: auto;
+//     background-color: white;
+//   }
+//   input, textarea, .button-group, {
+//     width: 50%;
+//     display: flex;
+//     margin-left: auto;
+//     background-color: white;
+//   }
+//
+//   .create-task-button{
+//     margin: 0 auto;
+//   }
+// }
+
+.new-task-submit-button {
+
+}
