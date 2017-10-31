@@ -4,50 +4,64 @@
     <div class="drawer-heading">
       <h2 class="drawer-title">Update Task</h2>
     </div>
+
     <div class="drawer-body">
 
       <div class='update-task-fields'>
         <section class='section-update-task'>
 
 
-              <form id='form-update-task' name='form-update-task'>
+          <form id='form-update-task' name='form-update-task'>
 
+            <div class='row'>
               <div class='update-field'>
                 <label for="task-title">Title: </label>
                 <input type='text' id='task-title-drawer' autocomplete="off" value='${res.title}' maxlength=120 required/>
               </div>
+            </div>
 
+            <div class='row'>
               <div class='update-field'>
                 <label for="task-assignee_id-drawer">Assign this task to someone else?</label>
                 <input id="openAssignIdCheckMarkBox" type="checkbox"/>
                 <div class='appendUserInputBox'> </div>
               </div>
+            </div>
 
+            <div class='row'>
               <div class='update-field'>
                 <label for="task-description">Description: </label>
                 <textarea id='task-description-drawer' autocomplete="off" required> ${res.description}</textarea>
               </div>
+            </div>
 
+            <div class='row'>
               <div class='update-field'>
                 <label for="due-date-task-date-picker">When is this due?</label>
                 <input type='text' id="due-date-task-date-picker" autocomplete="off"  value='${moment(res.due_date).format('MM/DD/YY')}' required>
               </div>
+            </div>
 
 
-
+            <div class='row'>
               <div class='update-field'>
-                <div class='select-picker-goes-here'></div>
+                <div class='select-picker-goes-here'>Status: </div>
               </div>
-
+              <br>
               <div class='update-field'>
                 <button type='submit' class='btn update-task-button'>Update Task</button>
-                <a href="#drawer-edit-task" data-toggle="drawer" aria-controls="drawerEditTask" class="btn btn-primary btn-sm">Close</a>
+                <button class='btn close-drawer' data-toggle="drawer" aria-controls="drawerEditTask" href="#drawer-edit-task">Close</button>
               </div>
+            </div>
+
+
+
           </div>
+
+
         </form>
       </section>
 
     </div>
   </div>
-</div>
 </div>

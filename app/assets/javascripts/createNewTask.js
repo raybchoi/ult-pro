@@ -12,19 +12,19 @@ $(document).on('turbolinks:load', function(){
         typeAheadForUserName (res, "#div-id-task-assignee")
       },
       error: function(err) {
-        // $.notify({
-        //   title: '<strong>Sorry!</strong>',
-        //   message: 'Task was not created. Can you try again?'
-        // },{
-        //   type: 'warning',
-        //   timer: 1000,
-        //   placement: {
-        //     from: "top",
-        //     align: "right"
-        //   },
-        //   delay: 5000,
-        //   timer: 1000,
-        // });
+        $.notify({
+          title: '<strong>Sorry!</strong>',
+          message: 'Task was not created. Can you try again?'
+        },{
+          type: 'warning',
+          timer: 1000,
+          placement: {
+            from: "top",
+            align: "right"
+          },
+          delay: 5000,
+          timer: 1000,
+        });
       }
       // end of AJAX call
     });
@@ -68,7 +68,12 @@ $(document).on('turbolinks:load', function(){
       };
     });
   }
-  getAllUsers()
+  function renderAllTaskFirstTime() {
+    if ( window.location.href === `http://localhost:3000/users/${document.cookie.split('id=')[1]}` ) {
+      getAllUsers()
+    };
+  };
+  renderAllTaskFirstTime()
 
   function resetFormToBeginning(nameOfDivId, nameOfDivClass) {
     $(nameOfDivId).empty();
@@ -201,20 +206,6 @@ $(document).on('turbolinks:load', function(){
       // #form-create-new-task
     });
 
-    // $(tableTypeToAppend).bootstrapTable('insertRow', {
-    //   index: 0,
-    //   row: {
-    //     status: newlyCreatedTaskData.status,
-    //     title:`<span class='task-title fake-link'> ${newlyCreatedTaskData.title.slice(0,120).concat('...')}</span>`,
-    //     description: newlyCreatedTaskData.description.slice(0,240).concat('...'),
-    //     taskResponsibleOwner: `${newlyCreatedTaskData.assignee_info.first_name} ${newlyCreatedTaskData.assignee_info.last_name}`,
-    //     createdDate:  moment(newlyCreatedTaskData.created_date).format("MM/DD/YY"),
-    //     dueDate: moment(newlyCreatedTaskData.due_date).format("MM/DD/YY"),
-    //     id: newlyCreatedTaskData.id,
-    //     editTask: `<span class="glyphicon glyphicon-pencil fake-span"></span>`,
-    //     deleteTask: `<span class="glyphicon glyphicon-trash fake-span"></span>`,
-    //     tableName: `tasksOtherOweMe`,
-    //   }
 
 
     $('.div-tasks').on('click-cell.bs.table', function (event, field, old, row) {
@@ -234,56 +225,70 @@ $(document).on('turbolinks:load', function(){
             <div class="drawer-heading">
               <h2 class="drawer-title">Update Task</h2>
             </div>
+
             <div class="drawer-body">
 
               <div class='update-task-fields'>
                 <section class='section-update-task'>
 
 
-                      <form id='form-update-task' name='form-update-task'>
+                  <form id='form-update-task' name='form-update-task'>
 
+                    <div class='row'>
                       <div class='update-field'>
                         <label for="task-title">Title: </label>
                         <input type='text' id='task-title-drawer' autocomplete="off" value='${res.title}' maxlength=120 required/>
                       </div>
+                    </div>
 
+                    <div class='row'>
                       <div class='update-field'>
                         <label for="task-assignee_id-drawer">Assign this task to someone else?</label>
                         <input id="openAssignIdCheckMarkBox" type="checkbox"/>
                         <div class='appendUserInputBox'> </div>
                       </div>
+                    </div>
 
+                    <div class='row'>
                       <div class='update-field'>
                         <label for="task-description">Description: </label>
-                        <textarea id='task-description-drawer' autocomplete="off" required> ${res.description}</textarea>
+                        <textarea id='task-description-drawer' autocomplete="off" required>${res.description}</textarea>
                       </div>
+                    </div>
 
+                    <div class='row'>
                       <div class='update-field'>
                         <label for="due-date-task-date-picker">When is this due?</label>
                         <input type='text' id="due-date-task-date-picker" autocomplete="off"  value='${moment(res.due_date).format('MM/DD/YY')}' required>
                       </div>
+                    </div>
 
 
-
+                    <div class='row'>
                       <div class='update-field'>
                         <div class='select-picker-goes-here'>Status: </div>
                       </div>
-
+                      <br>
+                    </div>
+                    <br>
+                    <div class='row'>
                       <div class='update-field'>
-                        <button type='submit' class='btn btn-primary update-task-button'>Update Task</button>
-
-                        <button class='btn btn-primary' data-toggle="drawer" aria-controls="drawerEditTask" href="#drawer-edit-task">Close</button>
-
+                        <button type='submit' class='btn update-task-button'>Update Task</button>
+                        <button class='btn close-drawer' data-toggle="drawer" aria-controls="drawerEditTask" href="#drawer-edit-task">Close</button>
                       </div>
+                    </div>
+
+
+
                   </div>
+
+
                 </form>
               </section>
 
             </div>
           </div>
         </div>
-        </div>
-
         `
       };
 
@@ -384,9 +389,9 @@ $(document).on('turbolinks:load', function(){
             $('#openAssignIdCheckMarkBox').on('change', function() {
               if (this.checked) {
                 $('.appendUserInputBox').append(`
-                  <div id='div-id-task-assignee-drawer' class="div-class-assign-task-drawer" contenteditable="true" autocomplete="off" required></div>
+                  <div id='div-id-task-assignee-drawer' class="div-class-assign-task-drawer" contenteditable="true" autocomplete="off" placeholder="@teammembername" required></div>
                   `)
-                insertTypeAheadUserNameDrawer(res);
+                // insertTypeAheadUserNameDrawer(res);
                 $('#div-id-task-assignee-drawer').append(assignedIndividualTypeAheadHtml);
                 typeAheadForUserName (jsonResponseFromGetAllUsers, "#div-id-task-assignee-drawer");
               } else {

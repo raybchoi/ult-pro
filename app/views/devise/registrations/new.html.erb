@@ -1,44 +1,44 @@
-<h2>Sign up</h2>
-<p>We are so happy you made it!</p>
+<h2 class='devise-label'>Sign up</h2>
+<p class='devise-label'>We are so happy you made it!</p>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email, :class => 'devise-label' %><br />
     <%= f.email_field :email, autofocus: true, :required => true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, :class => 'devise-label'%>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em class='devise-label'>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off", :required => true %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, :class => 'devise-label' %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", :required => true %>
   </div>
 
   <div class="field">
-    <%= f.label :first_name %><br />
+    <%= f.label :first_name, :class => 'devise-label' %><br />
     <%= f.text_field :first_name, maxlength: 25, :required => true %>
   </div>
 
   <div class="field">
-    <%= f.label :last_name %><br />
+    <%= f.label :last_name, :class => 'devise-label' %><br />
     <%= f.text_field :last_name, maxlength: 25, :required => true %>
   </div>
 
   <div class="field">
-    <%= f.label :company %><br />
-    <%= f.text_field :company, maxlength: 25, :required => true %>
-    <p> You can assign tasks based on you are a part of </p>
+    <%= f.label :company, :class => 'devise-label' %><br />
+    <%= f.text_field :company, maxlength: 25, :required => true%>
+    <p class='devise-label'> You can assign tasks based on you are a part of </p>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", :class => 'btn devise-login-button' %>
   </div>
 <% end %>
 

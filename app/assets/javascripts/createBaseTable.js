@@ -1,8 +1,7 @@
-console.log('renderAllTasksForOneUser.js file loaded');
+// console.log('renderAllTasksForOneUser.js file loaded');
 $(document).on('turbolinks:load', function(){
-
   function renderAllTasksForOneUser() {
-    console.log('LOADING ALL USERS');
+    // console.log('LOADING ALL USERS');
     $.ajax({
       method: 'GET',
       url: `http://localhost:3000/users/${document.cookie.split('id=')[1]}.json`,
@@ -21,12 +20,9 @@ $(document).on('turbolinks:load', function(){
         for (let i = 0; i < resOwnedTasks.length ; i++) {
           // console.log('MOMENT- ', moment(resAssignedTasks[i].created_date).format("MM/DD/YY"));
           // check to see if the task is assigned to self
-          // if ( resAssignedTasks[i].assignee_info.id === resAssignedTasks[i].owner_info.id ) {
-
           if ( ( resOwnedTasks[i].assignee_info.id === userCookieInformation) &&
           ( resOwnedTasks[i].owner_info.id === userCookieInformation )
         ) {
-          // if it is then fill in the array for tasks created for self
           tasksCreatedForMyself.push(
             {
               status: resOwnedTasks[i].status,
@@ -95,19 +91,19 @@ $(document).on('turbolinks:load', function(){
 
   },
   error: function(err) {
-  //   $.notify({
-  //     title: '<strong>Sorry!</strong>',
-  //     message: 'We ran into an error. Could you refresh the screen'
-  //   },{
-  //     type: 'warning',
-  //     timer: 1000,
-  //     placement: {
-  //       from: "top",
-  //       align: "right"
-  //     },
-  //     delay: 5000,
-  //     timer: 1000,
-  //   });
+    $.notify({
+      title: '<strong>Sorry!</strong>',
+      message: 'We ran into an error. Could you refresh the screen'
+    },{
+      type: 'warning',
+      timer: 1000,
+      placement: {
+        from: "top",
+        align: "right"
+      },
+      delay: 5000,
+      timer: 1000,
+    });
   }
 });
 };
@@ -118,7 +114,6 @@ function renderAllTaskFirstTime() {
   };
 };
 renderAllTaskFirstTime()
-
 
 function createTasksTable (taskData, tableIdFor, nameOfAssignedToColumnName){
 
@@ -160,13 +155,13 @@ function createTasksTable (taskData, tableIdFor, nameOfAssignedToColumnName){
         // editable: true,
       }, {
         field: 'createdDate',
-        title: 'Created Date',
+        title: 'Created',
         sortable: true,
         width: '5%',
       },
       {
         field: 'dueDate',
-        title: 'Due Date',
+        title: 'Due',
         sortable: true,
         width: '5%',
         type: 'combobox',
@@ -174,13 +169,13 @@ function createTasksTable (taskData, tableIdFor, nameOfAssignedToColumnName){
       {
         field: 'editTask',
         title: 'Edit',
-        width: '2.5%',
+        width: '2%',
         align: 'center',
       },
       {
         field: 'deleteTask',
         title: 'Delete',
-        width: '2.5%',
+        width: '2%',
         align: 'center',
       },
       {
@@ -203,14 +198,6 @@ function createTasksTable (taskData, tableIdFor, nameOfAssignedToColumnName){
       $($element).addClass('success');
     }),
   });
-  // function rowStyle(0);
 };
-
-
-
-
-
-
-
 // end of document.ready
 });

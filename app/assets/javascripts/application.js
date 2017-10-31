@@ -36,10 +36,6 @@
  $(document).on('turbolinks:load', function(){
    $.fn.editable.defaults.mode = 'inline';
 
-  // $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
-
-
-
   // https://stackoverflow.com/questions/28415178/how-do-you-show-the-current-time-on-a-web-page
 
 });
