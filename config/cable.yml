@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: redis://redistogo:97bf178ae684d944923361bd12c55119@grouper.redistogo.com:11258/
   channel_prefix: ult_pro_production
