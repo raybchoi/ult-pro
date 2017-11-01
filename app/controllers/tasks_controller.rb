@@ -24,6 +24,7 @@ class TasksController < ApplicationController
         #message and user hold the data we render on the page using javascript
           task: Task.find_by_id(@task[:id]),
           assignee_info: Task.find_by_id(@task[:id]).assignee,
+          owner: Task.find_by_id(@task[:id]).owner
         )
         # format.html { render :partial => 'users/tasks' }
         # @user = User.find(params[:id])

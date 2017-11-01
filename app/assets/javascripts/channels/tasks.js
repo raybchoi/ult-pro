@@ -14,13 +14,14 @@ function createTaskChannel() {
           // return $('#messages').append(this.renderMessage(data));
           let taskInfo = resData.task
           let assignee_info = resData.assignee_info
+          let owner_info = resData.owner_info
           $('#tasks_assigned_to_me').bootstrapTable('insertRow', {
             index: 0,
             row: {
               status: taskInfo.status,
               title:`<span class='task-title fake-link'> ${taskInfo.title.slice(0,120).concat('...')}</span>`,
               description: taskInfo.description.slice(0,240).concat('...'),
-              taskResponsibleOwner: `${assignee_info.first_name} ${assignee_info.last_name}`,
+              taskResponsibleOwner: `${owner_info.first_name} ${owner_info.last_name}`,
               createdDate:  moment(taskInfo.created_date).format("MM/DD/YY"),
               dueDate: moment(taskInfo.due_date).format("MM/DD/YY"),
               id: taskInfo.id,
