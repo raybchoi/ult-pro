@@ -1,7 +1,7 @@
 // console.log('renderAllTasksForOneUser.js file loaded');
 $(document).on('turbolinks:load', function(){
   let url = "https://chilling-mausoleum-21805.herokuapp.com"
-  let url2 = "http://localhost:3000"
+  let url1 = "http://localhost:3000"
   function renderAllTasksForOneUser() {
     // console.log('LOADING ALL USERS');
     // let ajaxurl = 'http://localhost:3000/users/'

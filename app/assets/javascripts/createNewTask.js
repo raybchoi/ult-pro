@@ -2,7 +2,7 @@
 $(document).on('turbolinks:load', function(){
   // initial ajax call
   let url = "https://chilling-mausoleum-21805.herokuapp.com"
-  let url2 = "http://localhost:3000"
+  let url1 = "http://localhost:3000"
   let jsonResponseFromGetAllUsers;
   function getAllUsers() {
     $.ajax({

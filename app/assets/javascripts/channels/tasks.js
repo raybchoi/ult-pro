@@ -10,6 +10,7 @@ function createTaskChannel() {
         },
         {
         received: function(resData) {
+          console.log('this is data - ', resData);
           // console.log('This is the createTaskChannel Data - ', resData);
           // return $('#messages').append(this.renderMessage(data));
           let taskInfo = resData.task

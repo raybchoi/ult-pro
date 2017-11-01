@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function(){
   $('.div-tasks').on('click-cell.bs.table', function (event, field, old, row) {
     // console.log('THIS IS DELETE - ', row);
     let url = "https://chilling-mausoleum-21805.herokuapp.com"
-    let url2 = "http://localhost:3000"
+    let url1 = "http://localhost:3000"
     let deleteTaskInfo;
     function deleteSingleTask (row, tableName) {
       swal({
