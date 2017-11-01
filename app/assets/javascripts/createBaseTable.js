@@ -194,7 +194,7 @@ function createTasksTable (taskData, tableIdFor, nameOfAssignedToColumnName){
     showHeader: true,
     pagination: true,
     pageSize: '5',
-    pageList: [10,25,100,'all'],
+    pageList: [5, 10,25,100,'all'],
     classes: "table table-hover table-condensed table-no-bordered",
     sortName: 'status',
     sortOrder: 'desc',

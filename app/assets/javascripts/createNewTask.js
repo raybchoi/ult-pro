@@ -43,16 +43,13 @@ $(document).on('turbolinks:load', function(){
       limit: 200
     }
     $(divIdToTypeAheadTo).atwho(at_config)
-    // only allow @ or " " to be inputted
+    // only allow @ or " " to be inputted if there is a span
     $(divIdToTypeAheadTo).on('keypress', function(event) {
       // console.log('this is the div length - ', $('#span-assigned-to').length);
-      if ($('#span-assigned-to').length === 0) {
-        if ( event.keyCode === 64 || event.keyCode === 32 ) {
-          // console.log(divIdToTypeAheadTo).on('keypress', function(event)")
-        } else {
-          return false;
-        }
-      } else {
+      if ($('#span-assigned-to').length === 1) {
+        // if ( event.keyCode === 64 || event.keyCode === 32 ) {
+        //   // console.log(divIdToTypeAheadTo).on('keypress', function(event)")
+        // } else {
         $.notify({
           title: '<strong>Heads up!</strong>',
           message: 'You can only add one person to a task.'
@@ -67,6 +64,9 @@ $(document).on('turbolinks:load', function(){
           timer: 1000,
         });
         return false
+        // }
+      } else {
+        return true
       };
     });
   }

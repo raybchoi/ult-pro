@@ -18,11 +18,16 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     respond_to do |format|
       if @task.save
-        # format.html { render :partial => 'users/tasks' }
         format.json { render :show, status: :created, location: @task }
+        #broadcasting out to messages channel including the chat_id so messages are broadcasted to specific chat only
+        ActionCable.server.broadcast( "users_#{task_params[:assignee_id]}",
+        #message and user hold the data we render on the page using javascript
+          task: Task.find_by_id(@task[:id]),
+          assignee_info: Task.find_by_id(@task[:id]).assignee,
+        )
+        # format.html { render :partial => 'users/tasks' }
         # @user = User.find(params[:id])
         # format.json { render json: @user, status: :created, location: @task }
-        flash[:msg] = "Your task was saved!"
       else
         format.json { render json: @task.errors, status: :unprocessable_entity }
         flash[:error] = "Your pet was not saved!"

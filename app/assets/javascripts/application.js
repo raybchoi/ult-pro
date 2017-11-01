@@ -15,6 +15,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.atwho
+//= require_tree ./channels
 //= require typeahead.bundle.min
 //= require bootstrap-sprockets
 //= require bootstrap-table
