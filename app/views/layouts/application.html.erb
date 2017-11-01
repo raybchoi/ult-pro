@@ -4,10 +4,7 @@
   <title>UltPro</title>
   <%= csrf_meta_tags %>
 
-
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <!-- CSS -->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet">
@@ -15,47 +12,10 @@
   <!-- JS Bootstrap 3.3.7 and Bootstrap table and editable-->
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <!--
-  <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script> -->
 </head>
 
-<body class="has-drawer">
-
-  <!-- <nav class="navbar navbar-expand-lg navbar-static-top" style="background-color: blue;">
-  <div class="container">
-  <div class="navbar-header">
-  <%= link_to 'Ult Pro', root_path, class: 'navbar-brand' %>
-</div>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div id="navbar">
-<ul class="nav navbar-nav">
-<li><%= link_to 'Home', root_path %></li>
-</ul>
-<ul class="nav navbar-nav pull-right">
-<% if user_signed_in? %>
-<li class="dropdown">
-<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-<%= current_user.first_name %>
-<span class="caret"></span>
-</a>
-<ul class="dropdown-menu" role="menu">
-<li><%= link_to 'Profile', edit_user_registration_path %></li>
-<li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-</ul>
-</li>
-<% else %>
-<li><%= link_to 'Log In', new_user_session_path %></li>
-<li><%= link_to 'Sign Up', new_user_registration_path %></li>
-<% end %>
-</ul>
-</div>
-</div>
-</nav> -->
-
-
-
+<body>
+<!-- <body class="has-drawer <%= user_signed_in? ? 'normal-bg' : 'alt-bg'%>"> -->
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container nav-bar-container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -66,7 +26,7 @@
         <span class="icon-bar nav-bar-toggle-span"></span>
         <span class="icon-bar nav-bar-toggle-span"></span>
       </button>
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="/users/sign_up">
         Ult Pro
       </a>
     </div>
@@ -81,7 +41,7 @@
           </a>
           <ul class="dropdown-menu dropdown-for-nav-bar" role="menu">
           <li><%= link_to 'Edit Profile', edit_user_registration_path, :class => 'nav-bar-user-info' %></li>
-          <li><%= link_to 'Dashboard', user_path(current_user.id), :class => 'nav-bar-user-info' %></li>
+          <li><%= link_to 'Team', users_path, :class => 'nav-bar-user-info' %></li>
           <li><%= link_to 'Log out', destroy_user_session_path, method: :delete, :class => 'nav-bar-user-info' %></li>
           </ul>
         </li>
@@ -95,8 +55,6 @@
 </div><!-- /.container-fluid -->
 </nav>
 
-
-
   <% if @show_header %>
     <div>
       <div class='div-date-time-user-info'>
@@ -107,29 +65,22 @@
         </section>
       </div>
     </div>
+
+    <div class='container'>
+      <%= yield %>
+    </div>
+
+
   <% else %>
+    <div class='div-user-not-logged-in'>
+      <section class='section-user-not-logged-in'>
+        <div class='container'>
+          <%= yield %>
+        </div>
+      </section>
+    </div>
 
-  <%= stylesheet_link_tag 'main' %>
-  <!-- <div>
-  <div class='div-date-time-user-info'>
-  <section class='section-date-time-user-info'>
-  <h1 class='welcome-name'>Check out Ult Pro <h1>
-  <div class="date front-page" id='date'></div>
-  <div class="clock front-page"></div>
-</section>
-</div>
-</div> -->
   <% end %>
-
-
-  <div class='container'>
-  <%= yield %>
-  </div>
-
-
-
-
-
 
 
 

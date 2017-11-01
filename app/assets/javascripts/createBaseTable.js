@@ -1,7 +1,7 @@
 // console.log('renderAllTasksForOneUser.js file loaded');
 $(document).on('turbolinks:load', function(){
-  let url = "https://chilling-mausoleum-21805.herokuapp.com"
-
+  let url2 = "https://chilling-mausoleum-21805.herokuapp.com"
+  let url = "http://localhost:3000"
   function renderAllTasksForOneUser() {
     // console.log('LOADING ALL USERS');
     // let ajaxurl = 'http://localhost:3000/users/'
@@ -143,14 +143,14 @@ function createTasksTable (taskData, tableIdFor, nameOfAssignedToColumnName){
         field: 'title',
         title: 'Title',
         sortable: true,
-        width: '35%',
+        width: '20%',
         // editable: true,
       },
       {
         field: 'description',
         title: 'Description',
         sortable: true,
-        width: '35%',
+        width: '50%',
       },
       {
         field: 'taskResponsibleOwner',
@@ -193,8 +193,8 @@ function createTasksTable (taskData, tableIdFor, nameOfAssignedToColumnName){
     data: taskData,
     showHeader: true,
     pagination: true,
-    pageSize: '20',
-    pageList: [1,10,25,'all'],
+    pageSize: '5',
+    pageList: [10,25,100,'all'],
     classes: "table table-hover table-condensed table-no-bordered",
     sortName: 'status',
     sortOrder: 'desc',

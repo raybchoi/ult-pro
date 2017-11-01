@@ -1,3 +1,5 @@
+<div class=row>
+  <div class='col-lg-4 col-sm-4 log-in'>
 <h2 class='devise-label'>Sign up</h2>
 <p class='devise-label'>We are so happy you made it!</p>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -5,7 +7,7 @@
 
   <div class="field">
     <%= f.label :email, :class => 'devise-label' %><br />
-    <%= f.email_field :email, autofocus: true, :required => true %>
+    <%= f.email_field :email, autofocus: true, :required => true, :class => 'devise-type-in'%>
   </div>
 
   <div class="field">
@@ -13,33 +15,39 @@
     <% if @minimum_password_length %>
     <em class='devise-label'>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", :required => true %>
+    <%= f.password_field :password, autocomplete: "off", :required => true, :class => 'devise-type-in' %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation, :class => 'devise-label' %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", :required => true %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", :required => true, :class => 'devise-type-in'%>
   </div>
 
   <div class="field">
     <%= f.label :first_name, :class => 'devise-label' %><br />
-    <%= f.text_field :first_name, maxlength: 25, :required => true %>
+    <%= f.text_field :first_name, maxlength: 25, :required => true, :class => 'devise-type-in' %>
   </div>
 
   <div class="field">
     <%= f.label :last_name, :class => 'devise-label' %><br />
-    <%= f.text_field :last_name, maxlength: 25, :required => true %>
+    <%= f.text_field :last_name, maxlength: 25, :required => true, :class => 'devise-type-in' %>
   </div>
 
   <div class="field">
     <%= f.label :company, :class => 'devise-label' %><br />
-    <%= f.text_field :company, maxlength: 25, :required => true%>
-    <p class='devise-label'> You can assign tasks based on you are a part of </p>
+    <%= f.text_field :company, maxlength: 25, :required => true, :class => 'devise-type-in'%>
   </div>
-
+  <br>
   <div class="actions">
     <%= f.submit "Sign up", :class => 'btn devise-login-button' %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+</div>
+<div class='col-lg-8 col-sm-8 banner'>
+  <h1>Welcome to Ult Pro!</h1>
+  <h2>We make you productive by letting you focus on you by handling tasks that others owe you.</h2>
+</div>
+</div>

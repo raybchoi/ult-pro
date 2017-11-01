@@ -1,6 +1,7 @@
 // console.log('loadClock.js file loaded');
 $(document).on('turbolinks:load', function(){
-  let url = "https://chilling-mausoleum-21805.herokuapp.com"
+  let url2 = "https://chilling-mausoleum-21805.herokuapp.com"
+  let url = "http://localhost:3000"
   function renderClock() {
     if ( window.location.href === `${url}/users/${document.cookie.split('id=')[1]}` ) {
       let clock = $('.clock').FlipClock({

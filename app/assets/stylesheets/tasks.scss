@@ -12,11 +12,15 @@
 .div-class-assign-task, {
   border-style: solid;
   border-color: black;
-  border-width: .5px;
+  border-width: .20px;
   border-color: lightgrey;
   margin-top: 5px;
-  height: 26px;
-
+  height: 25px;
+  box-sizing: border-box;
+}
+#div-id-task-assignee {
+  padding-top: 2px !important;
+  padding-left: 1px !important;
 }
 #div-id-task-assignee-drawer {
   background-color: white;
@@ -108,7 +112,7 @@
 
 .create-task-button {
   background-color: #34A750;
-  margin-top: 11%;
+  margin-top: 7%;
   align: center;
   color: white;
   // width: 100%;
@@ -116,7 +120,6 @@
 .update-task-button, {
   background-color: #34A750;
   color: white;
-
 }
 .devise-login-button {
   background-color: #34A750;
@@ -147,49 +150,7 @@
   padding-top: 3px;
   padding-left: 1px;
 }
-// .datepicker {
-//   z-index: 2000 !important;
-// }
 
-// a.editable-click {
-//   color: green;
-//   border-color: green;
-// }
-// a.editable-click.editable-disabled {
-//   color: black;
-//   border-bottom: none;
-// }
-// a.editable-empty {
-//   color: gray;
-//   font-style: italic;
-// }
-
-// UPDATING THE SHOW PAGE FOR CREATING A TASk
-// .new-task-fields{
-//   display: flex;
-//   flex-wrap: wrap;
-// }
-// .new-task-individual-fields{
-//   display: flex;
-//   flex: 0 0 50%;
-//   justify-content: space-around;
-//   align-items: center;
-//   padding: 10px;
-//
-//   .div-class-assign-task {
-//     width: 100%;
-//     display: flex;
-//     margin-left: auto;
-//     background-color: white;
-//   }
-//   input, textarea, .button-group, {
-//     width: 50%;
-//     display: flex;
-//     margin-left: auto;
-//     background-color: white;
-//   }
-//
-//   .create-task-button{
-//     margin: 0 auto;
-//   }
+// .task-created{
+//   padding-top: -2px;
 // }

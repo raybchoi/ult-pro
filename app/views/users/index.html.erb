@@ -1,10 +1,6 @@
-<h1>Show all users</h1>
+<h2>Company Employees</h2>
 <hr>
 <% @users.each do |user| %>
-  <%= link_to "#{user.first_name.upcase}", user_path(user.id) %>
-  <p>User ID: <%= user.id %></p>
-  <p>First Name: <%= user.first_name %></p>
-  <p>Last Name: <%= user.last_name %></p>
+  <h2><%= link_to "#{user.first_name.upcase}", user_path(user.id), :class => 'user-index-page-name'%></h2>
   <p>Email: <%= user.email %></p>
-  <p>Company: <%= user.company %></p>
 <% end %>
